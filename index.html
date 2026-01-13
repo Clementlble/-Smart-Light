@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrôle LED Home Assistant</title>
+    <meta name="theme-color" content="#0c0c0c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Smart Lighting">
+    <meta name="description" content="Contrôlez vos LED Home Assistant">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNtYXJ0IExpZ2h0aW5nIiwKICAic2hvcnRfbmFtZSI6ICJTbWFydCBMRUQiLAogICJkZXNjcmlwdGlvbiI6ICJDb250csO0bGV6IHZvcyBMRUQgSG9tZSBBc3Npc3RhbnQiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBjMGMwYyIsCiAgInRoZW1lX2NvbG9yIjogIiMwYzBjMGMiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MicgZmlsbD0nbm9uZScgc3Ryb2tlPSclMjNmZmZmZmYnIHN0cm9rZS13aWR0aD0nOCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJyUzRSUzQ3BhdGggZD0nTTk2IDMwdjYwbTAgMGEzNSAzNSAwIDAgMSAwIDcwbTAtNzBhMzUgMzUgMCAwIDAgMCA3MCcvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyBmaWxsPSdub25lJyBzdHJva2U9JyUyM2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJyUzRSUzQ3BhdGggZD0nTTI1NiA4MHYxNjBtMCAwYTkwIDkwIDAgMCAxIDAgMTgwbTAtMTgwYTkwIDkwIDAgMCAwIDAgMTgwJy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <title>Smart Lighting - Home Assistant</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -19,6 +25,8 @@
             color: #fff;
             position: relative;
             overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body::before {
@@ -40,6 +48,7 @@
             position: relative;
             z-index: 1;
             padding: 20px;
+            padding-bottom: 80px;
         }
 
         .glass {
@@ -49,6 +58,76 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
                         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* INSTALL BANNER */
+        .install-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.15) 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .install-banner.show {
+            transform: translateY(0);
+        }
+
+        .install-banner-content {
+            flex: 1;
+        }
+
+        .install-banner-title {
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+
+        .install-banner-text {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .install-banner-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .install-btn, .dismiss-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .install-btn {
+            background: #fff;
+            color: #0c0c0c;
+        }
+
+        .install-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .dismiss-btn {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* PAGE DE CONNEXION */
@@ -273,11 +352,8 @@
             opacity: 1;
         }
 
-        .led-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.15);
+        .led-card:active {
+            transform: scale(0.98);
         }
 
         .led-header {
@@ -311,9 +387,8 @@
             padding: 0;
         }
 
-        .power-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        .power-button:active {
+            transform: scale(0.95);
         }
 
         .power-button.on {
@@ -386,9 +461,8 @@
             transition: all 0.2s ease;
         }
 
-        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+        .control-group input[type="range"]::-webkit-slider-thumb:active {
             transform: scale(1.2);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.6);
         }
 
         .control-group input[type="range"]::-moz-range-thumb {
@@ -412,9 +486,8 @@
             transition: all 0.3s ease;
         }
 
-        .color-picker-wrapper:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+        .color-picker-wrapper:active {
+            transform: scale(0.98);
         }
 
         .color-picker-wrapper input[type="color"] {
@@ -488,6 +561,7 @@
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
+                padding-bottom: 80px;
             }
 
             .login-card {
@@ -533,6 +607,19 @@
                 right: 16px;
                 font-size: 0.9em;
             }
+
+            .install-banner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .install-banner-actions {
+                width: 100%;
+            }
+
+            .install-btn, .dismiss-btn {
+                flex: 1;
+            }
         }
 
         @media (max-width: 480px) {
@@ -553,9 +640,34 @@
                 font-size: 13px;
             }
         }
+
+        /* PWA SAFE AREAS */
+        @supports (padding: max(0px)) {
+            .container {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-bottom: max(80px, env(safe-area-inset-bottom));
+            }
+
+            .install-banner {
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- INSTALL BANNER -->
+    <div id="installBanner" class="install-banner">
+        <div class="install-banner-content">
+            <div class="install-banner-title">Installer Smart Lighting</div>
+            <div class="install-banner-text">Accédez rapidement à vos LED depuis votre écran d'accueil</div>
+        </div>
+        <div class="install-banner-actions">
+            <button class="dismiss-btn" onclick="dismissInstall()">Plus tard</button>
+            <button class="install-btn" onclick="installApp()">Installer</button>
+        </div>
+    </div>
+
     <!-- PAGE DE CONNEXION -->
     <div id="loginPage" class="login-page active">
         <div class="login-container">
@@ -607,10 +719,88 @@
     <div id="statusMessage" class="status-message"></div>
 
     <script>
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    self.addEventListener('install', (e) => {
+                        self.skipWaiting();
+                    });
+                    
+                    self.addEventListener('activate', (e) => {
+                        self.clients.claim();
+                    });
+                    
+                    self.addEventListener('fetch', (e) => {
+                        e.respondWith(
+                            fetch(e.request).catch(() => {
+                                return new Response('Offline', { status: 503 });
+                            })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl).then(reg => {
+                    console.log('Service Worker enregistré');
+                }).catch(err => {
+                    console.log('Erreur Service Worker:', err);
+                });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installBanner = document.getElementById('installBanner');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Vérifier si déjà installé ou banner déjà fermée
+            if (!localStorage.getItem('installBannerDismissed')) {
+                setTimeout(() => {
+                    installBanner.classList.add('show');
+                }, 2000);
+            }
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showStatus('Application installée avec succès');
+                    }
+                    deferredPrompt = null;
+                    installBanner.classList.remove('show');
+                });
+            }
+        }
+
+        function dismissInstall() {
+            installBanner.classList.remove('show');
+            localStorage.setItem('installBannerDismissed', 'true');
+        }
+
+        // App Logic
         let haUrl = '';
         let haToken = '';
         let lights = [];
         let demoMode = false;
+
+        // Charger les données sauvegardées
+        window.addEventListener('load', () => {
+            const savedUrl = localStorage.getItem('haUrl');
+            const savedToken = localStorage.getItem('haToken');
+            
+            if (savedUrl && savedToken) {
+                document.getElementById('haUrl').value = savedUrl;
+                document.getElementById('haToken').value = savedToken;
+            }
+        });
 
         const demoLights = [
             {
@@ -699,6 +889,8 @@
             haToken = '';
             lights = [];
             demoMode = false;
+            localStorage.removeItem('haUrl');
+            localStorage.removeItem('haToken');
             document.getElementById('haUrl').value = 'http://homeassistant.local:8123';
             document.getElementById('haToken').value = '';
             document.getElementById('ledContainer').innerHTML = '';
@@ -747,6 +939,10 @@
                     document.getElementById('loading').style.display = 'none';
                     return;
                 }
+
+                // Sauvegarder les identifiants
+                localStorage.setItem('haUrl', haUrl);
+                localStorage.setItem('haToken', haToken);
 
                 showHomePage();
                 displayLights();
