@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrôle LED Home Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0c0c0c;
+            min-height: 100vh;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* PAGE DE CONNEXION */
+        .login-page {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-page.active {
+            display: flex;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card {
+            padding: 40px;
+            border-radius: 24px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95em;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 0.95em;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            font-size: 15px;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .demo-link {
+            text-align: center;
+            margin-top: 24px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9em;
+        }
+
+        .demo-link a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .demo-link a:hover {
+            color: #ffffff;
+        }
+
+        /* PAGE D'ACCUEIL */
+        .home-page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .home-page.active {
+            display: block;
+        }
+
+        .home-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .home-header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-actions button {
+            width: auto;
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+
+        .all-controls {
+            padding: 24px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+        }
+
+        .all-controls h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .all-controls-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .all-controls-buttons button {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .led-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .led-card {
+            padding: 24px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .led-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .led-card:hover::before {
+            opacity: 1;
+        }
+
+        .led-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .led-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+
+        .led-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.5px;
+            flex: 1;
+        }
+
+        .power-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            padding: 0;
+        }
+
+        .power-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .power-button.on {
+            background: #00ff11;
+            border-color: #00ff11;
+            box-shadow: 0 0 20px rgba(0, 255, 17, 0.5);
+        }
+
+        .power-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: #fff;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .toggle-btn {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 18px;
+            font-size: 15px;
+            border-radius: 16px;
+        }
+
+        .toggle-btn.on {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .toggle-btn.off {
+            background: linear-gradient(135deg, rgba(80, 80, 80, 0.3) 0%, rgba(60, 60, 60, 0.3) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .control-group {
+            margin-bottom: 18px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.6);
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        .color-picker-wrapper {
+            position: relative;
+            width: 100%;
+            height: 56px;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .color-picker-wrapper:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+        }
+
+        .color-picker-wrapper input[type="color"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        .color-display {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .brightness-value {
+            font-weight: 600;
+            color: #ffffff;
+            margin-left: 8px;
+        }
+
+        .status-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            left: 20px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(-100px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.5px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .status-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-message.success {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.15) 100%);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .status-message.error {
+            background: linear-gradient(135deg, rgba(100, 100, 100, 0.3) 0%, rgba(80, 80, 80, 0.3) 100%);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .loading {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2em;
+            margin-top: 60px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            .login-header h1 {
+                font-size: 2em;
+            }
+
+            .home-header h1 {
+                font-size: 1.8em;
+                width: 100%;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-actions button {
+                flex: 1;
+            }
+
+            .led-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .led-card {
+                padding: 20px;
+            }
+
+            .all-controls {
+                padding: 20px;
+            }
+
+            .all-controls-buttons button {
+                min-width: 120px;
+            }
+
+            .status-message {
+                left: 16px;
+                right: 16px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-header h1 {
+                font-size: 1.8em;
+            }
+
+            .home-header h1 {
+                font-size: 1.5em;
+            }
+
+            .led-name {
+                font-size: 1.1em;
+            }
+
+            .header-actions button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE DE CONNEXION -->
+    <div id="loginPage" class="login-page active">
+        <div class="login-container">
+            <div class="login-card glass">
+                <div class="login-header">
+                    <h1>Smart Lighting</h1>
+                    <p>Connectez-vous à Home Assistant</p>
+                </div>
+                <div class="input-group">
+                    <label for="haUrl">URL Home Assistant</label>
+                    <input type="text" id="haUrl" placeholder="http://homeassistant.local:8123" value="http://homeassistant.local:8123">
+                </div>
+                <div class="input-group">
+                    <label for="haToken">Token d'accès</label>
+                    <input type="password" id="haToken" placeholder="Votre token d'accès longue durée">
+                </div>
+                <button onclick="connectHA()">Se connecter</button>
+                <div class="demo-link">
+                    <a onclick="activateDemo()">Essayer le mode démo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE D'ACCUEIL -->
+    <div id="homePage" class="home-page">
+        <div class="container">
+            <div class="home-header">
+                <h1>Smart Lighting</h1>
+                <div class="header-actions">
+                    <button onclick="refreshDevices()">Actualiser</button>
+                    <button onclick="logout()">Déconnexion</button>
+                </div>
+            </div>
+
+            <div class="all-controls glass" id="allControls" style="display: none;">
+                <h2>Contrôles globaux</h2>
+                <div class="all-controls-buttons">
+                    <button onclick="toggleAllLights(true)">Tout allumer</button>
+                    <button onclick="toggleAllLights(false)">Tout éteindre</button>
+                </div>
+            </div>
+
+            <div id="ledContainer"></div>
+            <div id="loading" class="loading" style="display: none;">Chargement des appareils...</div>
+        </div>
+    </div>
+
+    <div id="statusMessage" class="status-message"></div>
+
+    <script>
+        let haUrl = '';
+        let haToken = '';
+        let lights = [];
+        let demoMode = false;
+
+        const demoLights = [
+            {
+                entity_id: 'light.salon_principale',
+                state: 'on',
+                attributes: {
+                    friendly_name: 'Salon - Lumière principale',
+                    brightness: 200,
+                    supported_color_modes: ['rgb'],
+                    rgb_color: [255, 255, 255]
+                }
+            },
+            {
+                entity_id: 'light.cuisine_ruban_led',
+                state: 'on',
+                attributes: {
+                    friendly_name: 'Cuisine - Ruban LED',
+                    brightness: 150,
+                    supported_color_modes: ['rgb'],
+                    rgb_color: [255, 120, 50]
+                }
+            },
+            {
+                entity_id: 'light.chambre_plafonnier',
+                state: 'off',
+                attributes: {
+                    friendly_name: 'Chambre - Plafonnier',
+                    brightness: 255,
+                    supported_color_modes: ['rgb'],
+                    rgb_color: [255, 255, 255]
+                }
+            },
+            {
+                entity_id: 'light.bureau_led_strip',
+                state: 'on',
+                attributes: {
+                    friendly_name: 'Bureau - LED Strip',
+                    brightness: 180,
+                    supported_color_modes: ['rgb'],
+                    rgb_color: [100, 150, 255]
+                }
+            },
+            {
+                entity_id: 'light.entree_applique',
+                state: 'on',
+                attributes: {
+                    friendly_name: 'Entrée - Applique murale',
+                    brightness: 100,
+                    supported_color_modes: null,
+                    rgb_color: null
+                }
+            },
+            {
+                entity_id: 'light.jardin_spots',
+                state: 'off',
+                attributes: {
+                    friendly_name: 'Jardin - Spots LED',
+                    brightness: 255,
+                    supported_color_modes: ['rgb'],
+                    rgb_color: [50, 255, 100]
+                }
+            }
+        ];
+
+        function activateDemo() {
+            demoMode = true;
+            lights = [...demoLights];
+            showHomePage();
+            displayLights();
+            document.getElementById('allControls').style.display = 'block';
+            showStatus('Mode démo activé');
+        }
+
+        function showHomePage() {
+            document.getElementById('loginPage').classList.remove('active');
+            document.getElementById('homePage').classList.add('active');
+        }
+
+        function showLoginPage() {
+            document.getElementById('homePage').classList.remove('active');
+            document.getElementById('loginPage').classList.add('active');
+        }
+
+        function logout() {
+            haUrl = '';
+            haToken = '';
+            lights = [];
+            demoMode = false;
+            document.getElementById('haUrl').value = 'http://homeassistant.local:8123';
+            document.getElementById('haToken').value = '';
+            document.getElementById('ledContainer').innerHTML = '';
+            document.getElementById('allControls').style.display = 'none';
+            showLoginPage();
+            showStatus('Déconnexion réussie');
+        }
+
+        function showStatus(message, isError = false) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message show ${isError ? 'error' : 'success'}`;
+            setTimeout(() => {
+                statusEl.classList.remove('show');
+            }, 3000);
+        }
+
+        async function connectHA() {
+            haUrl = document.getElementById('haUrl').value.trim();
+            haToken = document.getElementById('haToken').value.trim();
+
+            if (!haUrl || !haToken) {
+                showStatus('Veuillez remplir tous les champs', true);
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch(`${haUrl}/api/states`, {
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erreur de connexion à Home Assistant');
+                }
+
+                const states = await response.json();
+                lights = states.filter(entity => entity.entity_id.startsWith('light.'));
+
+                if (lights.length === 0) {
+                    showStatus('Aucune LED trouvée', true);
+                    document.getElementById('loading').style.display = 'none';
+                    return;
+                }
+
+                showHomePage();
+                displayLights();
+                document.getElementById('allControls').style.display = 'block';
+                showStatus(`${lights.length} LED(s) trouvée(s)`);
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        async function refreshDevices() {
+            if (demoMode) {
+                displayLights();
+                showStatus('Actualisation démo');
+                return;
+            }
+
+            if (!haUrl || !haToken) {
+                showStatus('Erreur de configuration', true);
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('ledContainer').innerHTML = '';
+
+            try {
+                const response = await fetch(`${haUrl}/api/states`, {
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erreur de connexion à Home Assistant');
+                }
+
+                const states = await response.json();
+                lights = states.filter(entity => entity.entity_id.startsWith('light.'));
+
+                if (lights.length === 0) {
+                    showStatus('Aucune LED trouvée', true);
+                    document.getElementById('loading').style.display = 'none';
+                    return;
+                }
+
+                displayLights();
+                document.getElementById('allControls').style.display = 'block';
+                showStatus(`${lights.length} LED(s) actualisée(s)`);
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function displayLights() {
+            const container = document.getElementById('ledContainer');
+            container.innerHTML = '<div class="led-grid"></div>';
+            const grid = container.querySelector('.led-grid');
+
+            lights.forEach(light => {
+                const card = createLightCard(light);
+                grid.appendChild(card);
+            });
+        }
+
+        function createLightCard(light) {
+            const card = document.createElement('div');
+            card.className = 'led-card glass';
+            card.id = `card-${light.entity_id}`;
+
+            const isOn = light.state === 'on';
+            const brightness = light.attributes.brightness || 255;
+            const brightnessPercent = Math.round((brightness / 255) * 100);
+            const supportsColor = light.attributes.supported_color_modes?.includes('rgb') || 
+                                 light.attributes.supported_color_modes?.includes('hs');
+            
+            let colorHex = '#ffffff';
+            if (supportsColor && light.attributes.rgb_color) {
+                const [r, g, b] = light.attributes.rgb_color;
+                colorHex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+            }
+
+            card.innerHTML = `
+                <div class="led-header">
+                    <div class="led-name">${light.attributes.friendly_name || light.entity_id}</div>
+                    <button class="power-button ${isOn ? 'on' : ''}" onclick="toggleLightFromButton('${light.entity_id}')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2v10m0 0a5 5 0 0 1 0 10m0-10a5 5 0 0 0 0 10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="toggle-btn ${isOn ? 'on' : 'off'}" onclick="toggleLight('${light.entity_id}')">
+                    ${isOn ? 'Éteindre' : 'Allumer'}
+                </button>
+                <div class="control-group">
+                    <label>Luminosité <span class="brightness-value" id="brightness-value-${light.entity_id}">${brightnessPercent}%</span></label>
+                    <input type="range" min="0" max="100" value="${brightnessPercent}" 
+                           oninput="updateBrightnessDisplay('${light.entity_id}', this.value)"
+                           onchange="setBrightness('${light.entity_id}', this.value)">
+                </div>
+                ${supportsColor ? `
+                <div class="control-group">
+                    <label>Couleur</label>
+                    <div class="color-picker-wrapper">
+                        <input type="color" value="${colorHex}" 
+                               onchange="setColor('${light.entity_id}', this.value)">
+                        <div class="color-display" style="background: ${colorHex}"></div>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            return card;
+        }
+
+        function updateBrightnessDisplay(entityId, value) {
+            document.getElementById(`brightness-value-${entityId}`).textContent = value + '%';
+        }
+
+        async function toggleLightFromButton(entityId) {
+            await toggleLight(entityId);
+        }
+
+        async function toggleLight(entityId) {
+            if (demoMode) {
+                const light = lights.find(l => l.entity_id === entityId);
+                light.state = light.state === 'on' ? 'off' : 'on';
+                displayLights();
+                showStatus('État changé');
+                return;
+            }
+
+            const light = lights.find(l => l.entity_id === entityId);
+            const service = light.state === 'on' ? 'turn_off' : 'turn_on';
+
+            try {
+                const response = await fetch(`${haUrl}/api/services/light/${service}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entity_id: entityId
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du changement d\'état');
+
+                setTimeout(refreshDevices, 500);
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+        }
+
+        async function setBrightness(entityId, value) {
+            if (demoMode) {
+                const light = lights.find(l => l.entity_id === entityId);
+                light.attributes.brightness = Math.round((value / 100) * 255);
+                showStatus('Luminosité changée');
+                return;
+            }
+
+            const brightness = Math.round((value / 100) * 255);
+
+            try {
+                const response = await fetch(`${haUrl}/api/services/light/turn_on`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entity_id: entityId,
+                        brightness: brightness
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du réglage de la luminosité');
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+        }
+
+        async function setColor(entityId, hexColor) {
+            const r = parseInt(hexColor.substr(1, 2), 16);
+            const g = parseInt(hexColor.substr(3, 2), 16);
+            const b = parseInt(hexColor.substr(5, 2), 16);
+
+            const card = document.querySelector(`#card-${entityId.replace(/\./g, '\\.')}`);
+            const colorDisplay = card.querySelector('.color-display');
+            if (colorDisplay) {
+                colorDisplay.style.background = hexColor;
+            }
+
+            if (demoMode) {
+                const light = lights.find(l => l.entity_id === entityId);
+                light.attributes.rgb_color = [r, g, b];
+                showStatus('Couleur changée');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${haUrl}/api/services/light/turn_on`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entity_id: entityId,
+                        rgb_color: [r, g, b]
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du changement de couleur');
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+        }
+
+        async function toggleAllLights(turnOn) {
+            if (demoMode) {
+                lights.forEach(light => {
+                    light.state = turnOn ? 'on' : 'off';
+                });
+                displayLights();
+                showStatus(turnOn ? 'Toutes les LED allumées' : 'Toutes les LED éteintes');
+                return;
+            }
+
+            const service = turnOn ? 'turn_on' : 'turn_off';
+            const entityIds = lights.map(l => l.entity_id);
+
+            try {
+                const response = await fetch(`${haUrl}/api/services/light/${service}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${haToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entity_id: entityIds
+                    })
+                });
+
+                if (!response.ok) throw new Error('Erreur lors du contrôle global');
+
+                showStatus(turnOn ? 'Toutes les LED allumées' : 'Toutes les LED éteintes');
+                setTimeout(refreshDevices, 500);
+            } catch (error) {
+                showStatus('Erreur: ' + error.message, true);
+            }
+        }
+    </script>
+</body>
+</html>
