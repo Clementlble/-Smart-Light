@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0c0c0c">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Smart Lighting">
-    <meta name="description" content="Contrôlez vos LED Home Assistant">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNtYXJ0IExpZ2h0aW5nIiwKICAic2hvcnRfbmFtZSI6ICJTbWFydCBMRUQiLAogICJkZXNjcmlwdGlvbiI6ICJDb250csO0bGV6IHZvcyBMRUQgSG9tZSBBc3Npc3RhbnQiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzBjMGMwYyIsCiAgInRoZW1lX2NvbG9yIjogIiMwYzBjMGMiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MicgZmlsbD0nbm9uZScgc3Ryb2tlPSclMjNmZmZmZmYnIHN0cm9rZS13aWR0aD0nOCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJyUzRSUzQ3BhdGggZD0nTTk2IDMwdjYwbTAgMGEzNSAzNSAwIDAgMSAwIDcwbTAtNzBhMzUgMzUgMCAwIDAgMCA3MCcvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyBmaWxsPSdub25lJyBzdHJva2U9JyUyM2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczMCcgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJyUzRSUzQ3BhdGggZD0nTTI1NiA4MHYxNjBtMCAwYTkwIDkwIDAgMCAxIDAgMTgwbTAtMTgwYTkwIDkwIDAgMCAwIDAgMTgwJy8lM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
-    <title>Smart Lighting - Home Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>La Part du Chêne | Whisky Moderne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,1187 +13,1326 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background: #0c0c0c;
-            min-height: 100vh;
-            color: #fff;
-            position: relative;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #FFFFFF;
             overflow-x: hidden;
-            -webkit-user-select: none;
-            user-select: none;
+            line-height: 1.6;
         }
 
-        body::before {
-            content: '';
+        /* Navigation Ultra-Moderne */
+        nav {
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            padding-bottom: 80px;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* INSTALL BANNER */
-        .install-banner {
-            position: fixed;
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Archivo', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .nav-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .nav-cta {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Hero avec Image Époustouflante */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%),
+                url('https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-badge::before {
+            content: '✦';
+            color: #FFD700;
+        }
+
+        .hero-title {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2vw, 24px);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-bottom: 48px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.6s;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.8s;
+        }
+
+        .btn-primary {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Section Les 3 Portes - Cards Modernes */
+        .portes-section {
+            padding: 160px 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FFD700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        .portes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .porte-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .porte-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .porte-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .porte-card:hover::before {
+            opacity: 1;
+        }
+
+        .porte-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: rgba(255, 215, 0, 0.2);
+            margin-bottom: 24px;
+        }
+
+        .porte-name {
+            font-family: 'Archivo', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .porte-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .porte-link {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .porte-link:hover {
+            gap: 12px;
+        }
+
+        /* Section Collection - Grille Moderne */
+        .collection-section {
+            padding: 160px 60px;
+            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 24px 60px rgba(255, 215, 0, 0.15);
+        }
+
+        .product-image-container {
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(139, 69, 19, 0.08) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-1 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800&q=80'); }
+        .product-2 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80'); }
+        .product-3 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1582818498617-544176ae8888?w=800&q=80'); }
+        .product-4 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603899668606-c0cabd27e8a8?w=800&q=80'); }
+
+        .product-image-container::after {
+            content: '';
+            position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.15) 100%);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 16px 20px;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+            height: 100px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
         }
 
-        .install-banner.show {
-            transform: translateY(0);
+        .product-info {
+            padding: 32px;
         }
 
-        .install-banner-content {
-            flex: 1;
-        }
-
-        .install-banner-title {
+        .product-category {
+            font-size: 12px;
             font-weight: 600;
-            font-size: 0.95em;
-            margin-bottom: 4px;
+            color: #FFD700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
 
-        .install-banner-text {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .install-banner-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .install-btn, .dismiss-btn {
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .install-btn {
-            background: #fff;
-            color: #0c0c0c;
-        }
-
-        .install-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .dismiss-btn {
-            background: transparent;
-            color: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* PAGE DE CONNEXION */
-        .login-page {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .login-page.active {
-            display: flex;
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .login-card {
-            padding: 40px;
-            border-radius: 24px;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .login-header h1 {
-            font-size: 2.5em;
+        .product-name {
+            font-family: 'Archivo', sans-serif;
+            font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .login-header p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.95em;
-        }
-
-        .input-group {
-            margin-bottom: 24px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
+        .product-origin {
             color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            font-size: 0.95em;
-            letter-spacing: 0.5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            font-size: 15px;
-            color: #fff;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        button {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 16px 32px;
-            border-radius: 16px;
-            font-size: 15px;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.5px;
-            width: 100%;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .demo-link {
-            text-align: center;
-            margin-top: 24px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9em;
-        }
-
-        .demo-link a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .demo-link a:hover {
-            color: #ffffff;
-        }
-
-        /* PAGE D'ACCUEIL */
-        .home-page {
-            display: none;
-            min-height: 100vh;
-        }
-
-        .home-page.active {
-            display: block;
-        }
-
-        .home-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .home-header h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .header-actions button {
-            width: auto;
-            padding: 12px 24px;
             font-size: 14px;
+            margin-bottom: 20px;
         }
 
-        .all-controls {
-            padding: 24px;
-            border-radius: 24px;
-            margin-bottom: 24px;
-        }
-
-        .all-controls h2 {
-            font-size: 1.4em;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .all-controls-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .all-controls-buttons button {
-            flex: 1;
-            min-width: 140px;
-        }
-
-        .led-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .led-card {
-            padding: 24px;
-            border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .led-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .led-card:hover::before {
-            opacity: 1;
-        }
-
-        .led-card:active {
-            transform: scale(0.98);
-        }
-
-        .led-header {
+        .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            gap: 12px;
         }
 
-        .led-name {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: -0.5px;
-            flex: 1;
+        .product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFFFFF;
         }
 
-        .power-button {
+        .product-add {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            flex-shrink: 0;
-            padding: 0;
         }
 
-        .power-button:active {
-            transform: scale(0.95);
+        .product-add:hover {
+            background: #FFFFFF;
+            color: #000000;
         }
 
-        .power-button.on {
-            background: #00ff11;
-            border-color: #00ff11;
-            box-shadow: 0 0 20px rgba(0, 255, 17, 0.5);
+        /* Footer Moderne */
+        footer {
+            background: #000000;
+            padding: 100px 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .power-button svg {
-            width: 20px;
-            height: 20px;
-            stroke: #fff;
-            stroke-width: 2.5;
-            fill: none;
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 60px;
         }
 
-        .toggle-btn {
-            width: 100%;
-            padding: 16px;
-            margin-bottom: 18px;
-            font-size: 15px;
-            border-radius: 16px;
+        .footer-brand h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .toggle-btn.on {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .toggle-btn.off {
-            background: linear-gradient(135deg, rgba(80, 80, 80, 0.3) 0%, rgba(60, 60, 60, 0.3) 100%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.08);
-        }
-
-        .control-group {
-            margin-bottom: 18px;
-        }
-
-        .control-group label {
-            display: block;
-            margin-bottom: 12px;
+        .footer-brand p {
             color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
 
-        .control-group input[type="range"] {
-            width: 100%;
-            height: 6px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            outline: none;
-            -webkit-appearance: none;
-            cursor: pointer;
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .control-group input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #FFD700;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-            transition: all 0.2s ease;
-        }
-
-        .control-group input[type="range"]::-webkit-slider-thumb:active {
-            transform: scale(1.2);
-        }
-
-        .control-group input[type="range"]::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-        }
-
-        .color-picker-wrapper {
-            position: relative;
-            width: 100%;
-            height: 56px;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .color-picker-wrapper:active {
-            transform: scale(0.98);
+        .social-links a:hover {
+            background: #FFD700;
+            color: #000000;
         }
 
-        .color-picker-wrapper input[type="color"] {
+        /* Bannière défilante marques */
+        .brands-banner {
+            background: rgba(255, 215, 0, 0.03);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brands-track {
+            display: flex;
+            gap: 80px;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+
+        .brand-item {
+            font-family: 'Archivo', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .brand-item:hover {
+            color: rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Section Dégustation */
+        .tasting-section {
+            padding: 160px 60px;
+            background: linear-gradient(180deg, #0A0A0A 0%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tasting-section::before {
+            content: '';
             position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: radial-gradient(ellipse at top, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+        }
+
+        .tasting-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+        }
+
+        .tasting-info h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .tasting-info p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .tasting-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .tasting-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #FFD700;
+            color: #000000;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
             border: none;
             cursor: pointer;
-            opacity: 0;
+            transition: all 0.3s ease;
+            margin-top: 8px;
         }
 
-        .color-display {
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        .btn-submit:hover {
+            background: #F4E4C1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
         }
 
-        .brightness-value {
-            font-weight: 600;
-            color: #ffffff;
-            margin-left: 8px;
-        }
-
-        .status-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            left: 20px;
-            padding: 16px 20px;
-            border-radius: 16px;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            transform: translateY(-100px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            letter-spacing: 0.5px;
-            text-align: center;
-            max-width: 500px;
+        /* Section FAQ */
+        .faq-section {
+            padding: 160px 60px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .status-message.show {
-            opacity: 1;
-            transform: translateY(0);
+        .faq-container {
+            margin-top: 80px;
         }
 
-        .status-message.success {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.15) 100%);
-            border-color: rgba(255, 255, 255, 0.25);
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .status-message.error {
-            background: linear-gradient(135deg, rgba(100, 100, 100, 0.3) 0%, rgba(80, 80, 80, 0.3) 100%);
-            border-color: rgba(255, 255, 255, 0.15);
+        .faq-item:hover {
+            border-color: rgba(255, 215, 0, 0.2);
         }
 
-        .loading {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.2em;
-            margin-top: 60px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .faq-question {
+            padding: 28px 32px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
         }
 
-        /* MOBILE OPTIMIZATIONS */
-        @media (max-width: 768px) {
-            .container {
-                padding: 16px;
-                padding-bottom: 80px;
-            }
+        .faq-question:hover {
+            color: #FFD700;
+        }
 
-            .login-card {
-                padding: 32px 24px;
-            }
+        .faq-icon {
+            font-size: 24px;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
 
-            .login-header h1 {
-                font-size: 2em;
-            }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
 
-            .home-header h1 {
-                font-size: 1.8em;
-                width: 100%;
-            }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 32px;
+        }
 
-            .header-actions {
-                width: 100%;
-            }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 32px 28px 32px;
+        }
 
-            .header-actions button {
-                flex: 1;
-            }
+        .faq-answer p {
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            font-size: 16px;
+        }
 
-            .led-grid {
+        /* Section Contact */
+        .contact-section {
+            padding: 160px 60px;
+            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+        }
+
+        .contact-grid {
+            max-width: 1600px;
+            margin: 80px auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+            height: fit-content;
+        }
+
+        .contact-item {
+            margin-bottom: 32px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #FFD700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .contact-item-value {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-item-value a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item-value a:hover {
+            color: #FFD700;
+        }
+
+        .contact-form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .tasting-content,
+            .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
             }
-
-            .led-card {
-                padding: 20px;
+            
+            .form-row {
+                grid-template-columns: 1fr;
             }
+        }
 
-            .all-controls {
-                padding: 20px;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
-
-            .all-controls-buttons button {
-                min-width: 120px;
+            
+            .hero-content {
+                padding: 0 30px;
             }
-
-            .status-message {
-                left: 16px;
-                right: 16px;
-                font-size: 0.9em;
+            
+            .portes-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
             }
-
-            .install-banner {
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
                 flex-direction: column;
-                align-items: stretch;
+                gap: 20px;
             }
-
-            .install-banner-actions {
-                width: 100%;
+            
+            .tasting-form,
+            .contact-form-card,
+            .contact-info-card {
+                padding: 32px;
             }
-
-            .install-btn, .dismiss-btn {
-                flex: 1;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-header h1 {
-                font-size: 1.8em;
-            }
-
-            .home-header h1 {
-                font-size: 1.5em;
-            }
-
-            .led-name {
-                font-size: 1.1em;
-            }
-
-            .header-actions button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-        }
-
-        /* PWA SAFE AREAS */
-        @supports (padding: max(0px)) {
-            .container {
-                padding-left: max(20px, env(safe-area-inset-left));
-                padding-right: max(20px, env(safe-area-inset-right));
-                padding-bottom: max(80px, env(safe-area-inset-bottom));
-            }
-
-            .install-banner {
-                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            
+            .tasting-features {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- INSTALL BANNER -->
-    <div id="installBanner" class="install-banner">
-        <div class="install-banner-content">
-            <div class="install-banner-title">Installer Smart Lighting</div>
-            <div class="install-banner-text">Accédez rapidement à vos LED depuis votre écran d'accueil</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">La Part du Chêne</div>
+            <ul class="nav-links">
+                <li><a href="#philosophy">Notre Vision</a></li>
+                <li><a href="#portes">Les Portes</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#tasting">Dégustations</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#collection" class="nav-cta">Boutique</a></li>
+            </ul>
         </div>
-        <div class="install-banner-actions">
-            <button class="dismiss-btn" onclick="dismissInstall()">Plus tard</button>
-            <button class="install-btn" onclick="installApp()">Installer</button>
+    </nav>
+
+    <!-- Hero avec Verre de Whisky Magnifique -->
+    <section class="hero">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Premium Whisky Experience</div>
+            <h1 class="hero-title">
+                L'art de la<br>
+                <span>dégustation</span>
+            </h1>
+            <p class="hero-subtitle">
+                Transformez chaque moment en une expérience sensorielle unique. 
+                Découvrez le whisky autrement, avec passion et authenticité.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#collection" class="btn-primary">
+                    Découvrir la collection
+                    <span>→</span>
+                </a>
+                <a href="#portes" class="btn-secondary">
+                    Notre approche
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bannière Marques Défilante -->
+    <div class="brands-banner">
+        <div class="brands-track">
+            <span class="brand-item">GLENFIDDICH</span>
+            <span class="brand-item">MACALLAN</span>
+            <span class="brand-item">LAGAVULIN</span>
+            <span class="brand-item">TALISKER</span>
+            <span class="brand-item">HIGHLAND PARK</span>
+            <span class="brand-item">ARDBEG</span>
+            <span class="brand-item">BALVENIE</span>
+            <span class="brand-item">GLENLIVET</span>
+            <!-- Duplication pour l'effet infini -->
+            <span class="brand-item">GLENFIDDICH</span>
+            <span class="brand-item">MACALLAN</span>
+            <span class="brand-item">LAGAVULIN</span>
+            <span class="brand-item">TALISKER</span>
+            <span class="brand-item">HIGHLAND PARK</span>
+            <span class="brand-item">ARDBEG</span>
+            <span class="brand-item">BALVENIE</span>
+            <span class="brand-item">GLENLIVET</span>
         </div>
     </div>
 
-    <!-- PAGE DE CONNEXION -->
-    <div id="loginPage" class="login-page active">
-        <div class="login-container">
-            <div class="login-card glass">
-                <div class="login-header">
-                    <h1>Smart Lighting</h1>
-                    <p>Connectez-vous à Home Assistant</p>
-                </div>
-                <div class="input-group">
-                    <label for="haUrl">URL Home Assistant</label>
-                    <input type="text" id="haUrl" placeholder="http://homeassistant.local:8123" value="http://homeassistant.local:8123">
-                </div>
-                <div class="input-group">
-                    <label for="haToken">Token d'accès</label>
-                    <input type="password" id="haToken" placeholder="Votre token d'accès longue durée">
-                </div>
-                <button onclick="connectHA()">Se connecter</button>
-                <div class="demo-link">
-                    <a onclick="activateDemo()">Essayer le mode démo</a>
-                </div>
+    <!-- Les 3 Portes -->
+    <section class="portes-section" id="portes">
+        <div class="section-header">
+            <div class="section-label">Notre Philosophie</div>
+            <h2 class="section-title">Trois portes vers l'excellence</h2>
+            <p class="section-description">
+                Notre approche unique combine expertise technique, 
+                sensibilité émotionnelle et action réfléchie pour vous offrir 
+                une expérience de dégustation incomparable.
+            </p>
+        </div>
+
+        <div class="portes-grid">
+            <div class="porte-card">
+                <div class="porte-number">01</div>
+                <h3 class="porte-name">Comprendre</h3>
+                <p class="porte-text">
+                    Maîtrisez l'art de la dégustation. Explorez les arômes, 
+                    les textures et les techniques qui transforment chaque verre 
+                    en une expérience d'apprentissage fascinante.
+                </p>
+                <a href="#" class="porte-link">
+                    En savoir plus
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="porte-card">
+                <div class="porte-number">02</div>
+                <h3 class="porte-name">Ressentir</h3>
+                <p class="porte-text">
+                    Connectez-vous à vos émotions. Le whisky devient un miroir, 
+                    une invitation à ralentir et à explorer ce qui résonne 
+                    profondément en vous.
+                </p>
+                <a href="#" class="porte-link">
+                    Découvrir
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="porte-card">
+                <div class="porte-number">03</div>
+                <h3 class="porte-name">Choisir</h3>
+                <p class="porte-text">
+                    Passez de l'intention à l'action. Sélectionnez avec 
+                    discernement le whisky qui correspond à votre moment, 
+                    votre humeur, votre quête personnelle.
+                </p>
+                <a href="#" class="porte-link">
+                    Explorer
+                    <span>→</span>
+                </a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- PAGE D'ACCUEIL -->
-    <div id="homePage" class="home-page">
-        <div class="container">
-            <div class="home-header">
-                <h1>Smart Lighting</h1>
-                <div class="header-actions">
-                    <button onclick="refreshDevices()">Actualiser</button>
-                    <button onclick="logout()">Déconnexion</button>
-                </div>
-            </div>
-
-            <div class="all-controls glass" id="allControls" style="display: none;">
-                <h2>Contrôles globaux</h2>
-                <div class="all-controls-buttons">
-                    <button onclick="toggleAllLights(true)">Tout allumer</button>
-                    <button onclick="toggleAllLights(false)">Tout éteindre</button>
-                </div>
-            </div>
-
-            <div id="ledContainer"></div>
-            <div id="loading" class="loading" style="display: none;">Chargement des appareils...</div>
+    <!-- Collection -->
+    <section class="collection-section" id="collection">
+        <div class="section-header">
+            <div class="section-label">Notre Sélection</div>
+            <h2 class="section-title">Des whiskys d'exception</h2>
+            <p class="section-description">
+                Chaque bouteille est choisie avec soin pour vous accompagner 
+                dans votre voyage sensoriel. Authenticité, qualité et caractère.
+            </p>
         </div>
-    </div>
 
-    <div id="statusMessage" class="status-message"></div>
-
-    <script>
-        // PWA Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swCode = `
-                    self.addEventListener('install', (e) => {
-                        self.skipWaiting();
-                    });
-                    
-                    self.addEventListener('activate', (e) => {
-                        self.clients.claim();
-                    });
-                    
-                    self.addEventListener('fetch', (e) => {
-                        e.respondWith(
-                            fetch(e.request).catch(() => {
-                                return new Response('Offline', { status: 503 });
-                            })
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl).then(reg => {
-                    console.log('Service Worker enregistré');
-                }).catch(err => {
-                    console.log('Erreur Service Worker:', err);
-                });
-            });
-        }
-
-        // PWA Install Prompt
-        let deferredPrompt;
-        const installBanner = document.getElementById('installBanner');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // Vérifier si déjà installé ou banner déjà fermée
-            if (!localStorage.getItem('installBannerDismissed')) {
-                setTimeout(() => {
-                    installBanner.classList.add('show');
-                }, 2000);
-            }
-        });
-
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        showStatus('Application installée avec succès');
-                    }
-                    deferredPrompt = null;
-                    installBanner.classList.remove('show');
-                });
-            }
-        }
-
-        function dismissInstall() {
-            installBanner.classList.remove('show');
-            localStorage.setItem('installBannerDismissed', 'true');
-        }
-
-        // App Logic
-        let haUrl = '';
-        let haToken = '';
-        let lights = [];
-        let demoMode = false;
-
-        // Charger les données sauvegardées
-        window.addEventListener('load', () => {
-            const savedUrl = localStorage.getItem('haUrl');
-            const savedToken = localStorage.getItem('haToken');
-            
-            if (savedUrl && savedToken) {
-                document.getElementById('haUrl').value = savedUrl;
-                document.getElementById('haToken').value = savedToken;
-            }
-        });
-
-        const demoLights = [
-            {
-                entity_id: 'light.salon_principale',
-                state: 'on',
-                attributes: {
-                    friendly_name: 'Salon - Lumière principale',
-                    brightness: 200,
-                    supported_color_modes: ['rgb'],
-                    rgb_color: [255, 255, 255]
-                }
-            },
-            {
-                entity_id: 'light.cuisine_ruban_led',
-                state: 'on',
-                attributes: {
-                    friendly_name: 'Cuisine - Ruban LED',
-                    brightness: 150,
-                    supported_color_modes: ['rgb'],
-                    rgb_color: [255, 120, 50]
-                }
-            },
-            {
-                entity_id: 'light.chambre_plafonnier',
-                state: 'off',
-                attributes: {
-                    friendly_name: 'Chambre - Plafonnier',
-                    brightness: 255,
-                    supported_color_modes: ['rgb'],
-                    rgb_color: [255, 255, 255]
-                }
-            },
-            {
-                entity_id: 'light.bureau_led_strip',
-                state: 'on',
-                attributes: {
-                    friendly_name: 'Bureau - LED Strip',
-                    brightness: 180,
-                    supported_color_modes: ['rgb'],
-                    rgb_color: [100, 150, 255]
-                }
-            },
-            {
-                entity_id: 'light.entree_applique',
-                state: 'on',
-                attributes: {
-                    friendly_name: 'Entrée - Applique murale',
-                    brightness: 100,
-                    supported_color_modes: null,
-                    rgb_color: null
-                }
-            },
-            {
-                entity_id: 'light.jardin_spots',
-                state: 'off',
-                attributes: {
-                    friendly_name: 'Jardin - Spots LED',
-                    brightness: 255,
-                    supported_color_modes: ['rgb'],
-                    rgb_color: [50, 255, 100]
-                }
-            }
-        ];
-
-        function activateDemo() {
-            demoMode = true;
-            lights = [...demoLights];
-            showHomePage();
-            displayLights();
-            document.getElementById('allControls').style.display = 'block';
-            showStatus('Mode démo activé');
-        }
-
-        function showHomePage() {
-            document.getElementById('loginPage').classList.remove('active');
-            document.getElementById('homePage').classList.add('active');
-        }
-
-        function showLoginPage() {
-            document.getElementById('homePage').classList.remove('active');
-            document.getElementById('loginPage').classList.add('active');
-        }
-
-        function logout() {
-            haUrl = '';
-            haToken = '';
-            lights = [];
-            demoMode = false;
-            localStorage.removeItem('haUrl');
-            localStorage.removeItem('haToken');
-            document.getElementById('haUrl').value = 'http://homeassistant.local:8123';
-            document.getElementById('haToken').value = '';
-            document.getElementById('ledContainer').innerHTML = '';
-            document.getElementById('allControls').style.display = 'none';
-            showLoginPage();
-            showStatus('Déconnexion réussie');
-        }
-
-        function showStatus(message, isError = false) {
-            const statusEl = document.getElementById('statusMessage');
-            statusEl.textContent = message;
-            statusEl.className = `status-message show ${isError ? 'error' : 'success'}`;
-            setTimeout(() => {
-                statusEl.classList.remove('show');
-            }, 3000);
-        }
-
-        async function connectHA() {
-            haUrl = document.getElementById('haUrl').value.trim();
-            haToken = document.getElementById('haToken').value.trim();
-
-            if (!haUrl || !haToken) {
-                showStatus('Veuillez remplir tous les champs', true);
-                return;
-            }
-
-            document.getElementById('loading').style.display = 'block';
-
-            try {
-                const response = await fetch(`${haUrl}/api/states`, {
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erreur de connexion à Home Assistant');
-                }
-
-                const states = await response.json();
-                lights = states.filter(entity => entity.entity_id.startsWith('light.'));
-
-                if (lights.length === 0) {
-                    showStatus('Aucune LED trouvée', true);
-                    document.getElementById('loading').style.display = 'none';
-                    return;
-                }
-
-                // Sauvegarder les identifiants
-                localStorage.setItem('haUrl', haUrl);
-                localStorage.setItem('haToken', haToken);
-
-                showHomePage();
-                displayLights();
-                document.getElementById('allControls').style.display = 'block';
-                showStatus(`${lights.length} LED(s) trouvée(s)`);
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
-
-            document.getElementById('loading').style.display = 'none';
-        }
-
-        async function refreshDevices() {
-            if (demoMode) {
-                displayLights();
-                showStatus('Actualisation démo');
-                return;
-            }
-
-            if (!haUrl || !haToken) {
-                showStatus('Erreur de configuration', true);
-                return;
-            }
-
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('ledContainer').innerHTML = '';
-
-            try {
-                const response = await fetch(`${haUrl}/api/states`, {
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erreur de connexion à Home Assistant');
-                }
-
-                const states = await response.json();
-                lights = states.filter(entity => entity.entity_id.startsWith('light.'));
-
-                if (lights.length === 0) {
-                    showStatus('Aucune LED trouvée', true);
-                    document.getElementById('loading').style.display = 'none';
-                    return;
-                }
-
-                displayLights();
-                document.getElementById('allControls').style.display = 'block';
-                showStatus(`${lights.length} LED(s) actualisée(s)`);
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
-
-            document.getElementById('loading').style.display = 'none';
-        }
-
-        function displayLights() {
-            const container = document.getElementById('ledContainer');
-            container.innerHTML = '<div class="led-grid"></div>';
-            const grid = container.querySelector('.led-grid');
-
-            lights.forEach(light => {
-                const card = createLightCard(light);
-                grid.appendChild(card);
-            });
-        }
-
-        function createLightCard(light) {
-            const card = document.createElement('div');
-            card.className = 'led-card glass';
-            card.id = `card-${light.entity_id}`;
-
-            const isOn = light.state === 'on';
-            const brightness = light.attributes.brightness || 255;
-            const brightnessPercent = Math.round((brightness / 255) * 100);
-            const supportsColor = light.attributes.supported_color_modes?.includes('rgb') || 
-                                 light.attributes.supported_color_modes?.includes('hs');
-            
-            let colorHex = '#ffffff';
-            if (supportsColor && light.attributes.rgb_color) {
-                const [r, g, b] = light.attributes.rgb_color;
-                colorHex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
-            }
-
-            card.innerHTML = `
-                <div class="led-header">
-                    <div class="led-name">${light.attributes.friendly_name || light.entity_id}</div>
-                    <button class="power-button ${isOn ? 'on' : ''}" onclick="toggleLightFromButton('${light.entity_id}')">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2v10m0 0a5 5 0 0 1 0 10m0-10a5 5 0 0 0 0 10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-                <button class="toggle-btn ${isOn ? 'on' : 'off'}" onclick="toggleLight('${light.entity_id}')">
-                    ${isOn ? 'Éteindre' : 'Allumer'}
-                </button>
-                <div class="control-group">
-                    <label>Luminosité <span class="brightness-value" id="brightness-value-${light.entity_id}">${brightnessPercent}%</span></label>
-                    <input type="range" min="0" max="100" value="${brightnessPercent}" 
-                           oninput="updateBrightnessDisplay('${light.entity_id}', this.value)"
-                           onchange="setBrightness('${light.entity_id}', this.value)">
-                </div>
-                ${supportsColor ? `
-                <div class="control-group">
-                    <label>Couleur</label>
-                    <div class="color-picker-wrapper">
-                        <input type="color" value="${colorHex}" 
-                               onchange="setColor('${light.entity_id}', this.value)">
-                        <div class="color-display" style="background: ${colorHex}"></div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image-container product-1"></div>
+                <div class="product-info">
+                    <div class="product-category">Single Malt</div>
+                    <h3 class="product-name">Highland Storm</h3>
+                    <p class="product-origin">Écosse • 15 ans d'âge</p>
+                    <div class="product-footer">
+                        <div class="product-price">89€</div>
+                        <div class="product-add">+</div>
                     </div>
                 </div>
-                ` : ''}
-            `;
+            </div>
 
-            return card;
-        }
+            <div class="product-card">
+                <div class="product-image-container product-2"></div>
+                <div class="product-info">
+                    <div class="product-category">Bourbon</div>
+                    <h3 class="product-name">Oak Legacy</h3>
+                    <p class="product-origin">Kentucky • Small Batch</p>
+                    <div class="product-footer">
+                        <div class="product-price">125€</div>
+                        <div class="product-add">+</div>
+                    </div>
+                </div>
+            </div>
 
-        function updateBrightnessDisplay(entityId, value) {
-            document.getElementById(`brightness-value-${entityId}`).textContent = value + '%';
-        }
+            <div class="product-card">
+                <div class="product-image-container product-3"></div>
+                <div class="product-info">
+                    <div class="product-category">Islay</div>
+                    <h3 class="product-name">Peat & Ember</h3>
+                    <p class="product-origin">Écosse • Tourbé intense</p>
+                    <div class="product-footer">
+                        <div class="product-price">145€</div>
+                        <div class="product-add">+</div>
+                    </div>
+                </div>
+            </div>
 
-        async function toggleLightFromButton(entityId) {
-            await toggleLight(entityId);
-        }
+            <div class="product-card">
+                <div class="product-image-container product-4"></div>
+                <div class="product-info">
+                    <div class="product-category">Rye</div>
+                    <h3 class="product-name">Golden Harvest</h3>
+                    <p class="product-origin">Canada • Édition limitée</p>
+                    <div class="product-footer">
+                        <div class="product-price">95€</div>
+                        <div class="product-add">+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        async function toggleLight(entityId) {
-            if (demoMode) {
-                const light = lights.find(l => l.entity_id === entityId);
-                light.state = light.state === 'on' ? 'off' : 'on';
-                displayLights();
-                showStatus('État changé');
-                return;
-            }
+    <!-- Section Dégustation -->
+    <section class="tasting-section" id="tasting">
+        <div class="tasting-content">
+            <div class="tasting-info">
+                <div class="section-label">Expérience Premium</div>
+                <h2>Réservez votre dégustation privée</h2>
+                <p>
+                    Plongez dans l'univers du whisky lors d'une ségustation privée 
+                    animée par nos experts. Une expérience sur mesure pour découvrir, 
+                    apprendre et savourer.
+                </p>
+                
+                <div class="tasting-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Dégustations guidées par des experts</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Sélection de 5 à 8 whiskys premium</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Séances privées ou en petit groupe</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Accompagnements gastronomiques</div>
+                    </div>
+                </div>
 
-            const light = lights.find(l => l.entity_id === entityId);
-            const service = light.state === 'on' ? 'turn_off' : 'turn_on';
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.7);">
+                    💰 À partir de <strong style="color: #FFD700;">120€</strong> par personne<br>
+                    ⏱️ Durée : 2h à 3h<br>
+                    👥 2 à 12 personnes
+                </p>
+            </div>
 
-            try {
-                const response = await fetch(`${haUrl}/api/services/light/${service}`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        entity_id: entityId
-                    })
-                });
+            <div class="tasting-form">
+                <h3 style="font-size: 24px; margin-bottom: 24px; font-weight: 600;">Réserver une séance</h3>
+                
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom *</label>
+                            <input type="text" required placeholder="Jean">
+                        </div>
+                        <div class="form-group">
+                            <label>Nom *</label>
+                            <input type="text" required placeholder="Dupont">
+                        </div>
+                    </div>
 
-                if (!response.ok) throw new Error('Erreur lors du changement d\'état');
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" required placeholder="jean.dupont@email.com">
+                    </div>
 
-                setTimeout(refreshDevices, 500);
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
-        }
+                    <div class="form-group">
+                        <label>Téléphone *</label>
+                        <input type="tel" required placeholder="+33 6 12 34 56 78">
+                    </div>
 
-        async function setBrightness(entityId, value) {
-            if (demoMode) {
-                const light = lights.find(l => l.entity_id === entityId);
-                light.attributes.brightness = Math.round((value / 100) * 255);
-                showStatus('Luminosité changée');
-                return;
-            }
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date souhaitée *</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre de personnes *</label>
+                            <select required>
+                                <option value="">Sélectionner</option>
+                                <option value="2">2 personnes</option>
+                                <option value="3">3 personnes</option>
+                                <option value="4">4 personnes</option>
+                                <option value="5">5 personnes</option>
+                                <option value="6">6 personnes</option>
+                                <option value="8">8 personnes</option>
+                                <option value="10">10 personnes</option>
+                                <option value="12">12 personnes</option>
+                            </select>
+                        </div>
+                    </div>
 
-            const brightness = Math.round((value / 100) * 255);
+                    <div class="form-group">
+                        <label>Message (optionnel)</label>
+                        <textarea placeholder="Parlez-nous de vos préférences, niveau d'expertise, occasion spéciale..."></textarea>
+                    </div>
 
-            try {
-                const response = await fetch(`${haUrl}/api/services/light/turn_on`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        entity_id: entityId,
-                        brightness: brightness
-                    })
-                });
+                    <button type="submit" class="btn-submit">
+                        Envoyer la demande de réservation
+                    </button>
 
-                if (!response.ok) throw new Error('Erreur lors du réglage de la luminosité');
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
-        }
+                    <p style="font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-top: 16px; text-align: center;">
+                        Nous vous répondrons sous 24h pour confirmer la disponibilité
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
 
-        async function setColor(entityId, hexColor) {
-            const r = parseInt(hexColor.substr(1, 2), 16);
-            const g = parseInt(hexColor.substr(3, 2), 16);
-            const b = parseInt(hexColor.substr(5, 2), 16);
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-header" style="text-align: center; margin: 0 auto;">
+            <div class="section-label">Questions Fréquentes</div>
+            <h2 class="section-title">Tout ce que vous devez savoir</h2>
+            <p class="section-description">
+                Vous avez des questions ? Nous avons les réponses.
+            </p>
+        </div>
 
-            const card = document.querySelector(`#card-${entityId.replace(/\./g, '\\.')}`);
-            const colorDisplay = card.querySelector('.color-display');
-            if (colorDisplay) {
-                colorDisplay.style.background = hexColor;
-            }
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Comment choisir le bon whisky pour débuter ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Pour débuter, nous recommandons des whiskys doux et accessibles comme les single malts des Highlands ou des Speyside. Évitez les whiskys très tourbés d'Islay qui peuvent être trop intenses. Notre équipe est disponible pour vous guider selon vos préférences gustatives.</p>
+                </div>
+            </div>
 
-            if (demoMode) {
-                const light = lights.find(l => l.entity_id === entityId);
-                light.attributes.rgb_color = [r, g, b];
-                showStatus('Couleur changée');
-                return;
-            }
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Quelle est la différence entre single malt et blended ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Un single malt provient d'une seule distillerie et utilise uniquement de l'orge maltée. Un blended whisky mélange des whiskys de grain et de malt de différentes distilleries. Les single malts offrent généralement plus de caractère et de complexité.</p>
+                </div>
+            </div>
 
-            try {
-                const response = await fetch(`${haUrl}/api/services/light/turn_on`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        entity_id: entityId,
-                        rgb_color: [r, g, b]
-                    })
-                });
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Comment conserver correctement une bouteille de whisky ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Conservez vos bouteilles debout, à l'abri de la lumière directe et des variations de température. Une fois ouverte, une bouteille se conserve plusieurs années si elle est bien fermée. Évitez de la stocker près d'une source de chaleur.</p>
+                </div>
+            </div>
 
-                if (!response.ok) throw new Error('Erreur lors du changement de couleur');
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
-        }
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Livrez-vous partout en France ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Oui, nous livrons dans toute la France métropolitaine sous 48 à 72h. Les frais de port sont offerts à partir de 150€ d'achat. Nous travaillons avec des transporteurs spécialisés pour garantir une livraison sécurisée de vos bouteilles.</p>
+                </div>
+            </div>
 
-        async function toggleAllLights(turnOn) {
-            if (demoMode) {
-                lights.forEach(light => {
-                    light.state = turnOn ? 'on' : 'off';
-                });
-                displayLights();
-                showStatus(turnOn ? 'Toutes les LED allumées' : 'Toutes les LED éteintes');
-                return;
-            }
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Puis-je offrir une dégustation en cadeau ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolument ! Nous proposons des bons cadeaux pour nos dégustations privées. C'est le cadeau parfait pour un amateur de whisky. Le bon est valable 1 an et la date peut être choisie librement par le bénéficiaire.</p>
+                </div>
+            </div>
 
-            const service = turnOn ? 'turn_on' : 'turn_off';
-            const entityIds = lights.map(l => l.entity_id);
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Organisez-vous des événements d'entreprise ?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Oui, nous organisons des dégustations pour groupes et événements d'entreprise (team building, séminaires, etc.). Contactez-nous pour un devis personnalisé adapté à vos besoins et au nombre de participants.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            try {
-                const response = await fetch(`${haUrl}/api/services/light/${service}`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${haToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        entity_id: entityIds
-                    })
-                });
+    <!-- Section Contact -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>La Part du Chêne</h3>
+                <p>
+                    Redéfinir l'expérience du whisky à travers 
+                    une approche moderne, authentique et passionnée.
+                </p>
+                <div class="social-links">
+                    <a href="#">𝕏</a>
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                </div>
+            </div>
 
-                if (!response.ok) throw new Error('Erreur lors du contrôle global');
+            <div class="footer-section">
+                <h4>Explorer</h4>
+                <a href="#">Notre Vision</a>
+                <a href="#">Les Trois Portes</a>
+                <a href="#">Collection</a>
+                <a href="#">À Propos</a>
+            </div>
 
-                showStatus(turnOn ? 'Toutes les LED allumées' : 'Toutes les LED éteintes');
-                setTimeout(refreshDevices, 500);
-            } catch (error) {
-                showStatus('Erreur: ' + error.message, true);
-            }
+            <div class="footer-section">
+                <h4>Ressources</h4>
+                <a href="#">Guide de Dégustation</a>
+                <a href="#">Blog</a>
+                <a href="#">Newsletter</a>
+                <a href="#">FAQ</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="mailto:hello@lapartduchene.com">hello@lapartduchene.com</a>
+                <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                <a href="#">Paris, France</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                © 2026 La Part du Chêne. Tous droits réservés. 
+                <span style="margin-left: 16px; opacity: 0.6;">L'abus d'alcool est dangereux pour la santé.</span>
+            </div>
+            <div>
+                <a href="#" style="color: inherit; text-decoration: none; margin-right: 20px;">Mentions légales</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            // Fermer les autres items
+            allItems.forEach(item => {
+                if (item !== faqItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle l'item cliqué
+            faqItem.classList.toggle('active');
         }
     </script>
 </body>
