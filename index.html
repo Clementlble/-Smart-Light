@@ -231,6 +231,42 @@
             }
         }
 
+        /* Bannière défilante marques */
+        .brands-banner {
+            background: rgba(255, 215, 0, 0.03);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brands-track {
+            display: flex;
+            gap: 80px;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+
+        .brand-item {
+            font-family: 'Archivo', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .brand-item:hover {
+            color: rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* Section Les 3 Portes - Cards Modernes */
         .portes-section {
             padding: 160px 60px;
@@ -343,10 +379,72 @@
             gap: 12px;
         }
 
+        /* Section Stats Animée */
+        .stats-section {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            position: relative;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .stat-number {
+            font-family: 'Archivo', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
         /* Section Collection - Grille Moderne */
         .collection-section {
             padding: 160px 60px;
-            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+            background: linear-gradient(180deg, #0A0A0A 0%, #000000 100%);
         }
 
         .products-grid {
@@ -457,123 +555,225 @@
             color: #000000;
         }
 
-        /* Footer Moderne */
-        footer {
-            background: #000000;
-            padding: 100px 60px 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 60px;
-        }
-
-        .footer-brand h3 {
-            font-family: 'Archivo', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .footer-section h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .footer-section a {
-            display: block;
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-            margin-bottom: 12px;
-            font-size: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #FFD700;
-        }
-
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: #FFD700;
-            color: #000000;
-        }
-
-        /* Bannière défilante marques */
-        .brands-banner {
-            background: rgba(255, 215, 0, 0.03);
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-            padding: 40px 0;
-            overflow: hidden;
+        /* Section Témoignages Carousel */
+        .testimonials-section {
+            padding: 160px 60px;
+            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
             position: relative;
         }
 
-        .brands-track {
+        .testimonials-carousel {
+            max-width: 1400px;
+            margin: 80px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
             display: flex;
-            gap: 80px;
-            animation: scroll 30s linear infinite;
-            width: fit-content;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 32px;
         }
 
-        .brand-item {
-            font-family: 'Archivo', sans-serif;
-            font-size: 28px;
+        .testimonial-card {
+            min-width: calc(33.333% - 22px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+            flex-shrink: 0;
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 4px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #FFD700;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .author-name {
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.4);
-            white-space: nowrap;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            font-size: 16px;
+            margin-bottom: 4px;
         }
 
-        .brand-item:hover {
-            color: rgba(255, 215, 0, 0.8);
+        .author-role {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .carousel-prev {
+            left: -28px;
+        }
+
+        .carousel-next {
+            right: -28px;
+        }
+
+        /* Section Processus Dépliante */
+        .process-section {
+            padding: 160px 60px;
+            background: #000000;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+        }
+
+        .process-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .process-item:hover {
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .process-header {
+            padding: 32px 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .process-header:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .process-title-group {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .process-number {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: #FFD700;
+            flex-shrink: 0;
+        }
+
+        .process-title {
+            font-family: 'Archivo', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .process-icon {
+            font-size: 32px;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
+
+        .process-item.active .process-icon {
+            transform: rotate(45deg);
+        }
+
+        .process-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 40px;
+        }
+
+        .process-item.active .process-content {
+            max-height: 800px;
+            padding: 0 40px 32px 120px;
+        }
+
+        .process-description {
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .process-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .highlight-item {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .highlight-item strong {
+            color: #FFD700;
+            display: block;
+            margin-bottom: 4px;
         }
 
         /* Section Dégustation */
@@ -792,65 +992,87 @@
             font-size: 16px;
         }
 
-        /* Section Contact */
-        .contact-section {
-            padding: 160px 60px;
-            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
+        /* Footer Moderne */
+        footer {
+            background: #000000;
+            padding: 100px 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .contact-grid {
+        .footer-content {
             max-width: 1600px;
-            margin: 80px auto 0;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 80px;
+            margin-bottom: 60px;
         }
 
-        .contact-info-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 48px;
-            height: fit-content;
+        .footer-brand h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .contact-item {
-            margin-bottom: 32px;
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
 
-        .contact-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .contact-item-label {
-            font-size: 12px;
+        .footer-section h4 {
+            font-size: 14px;
             font-weight: 600;
-            color: #FFD700;
-            letter-spacing: 2px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 8px;
         }
 
-        .contact-item-value {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .contact-item-value a {
-            color: inherit;
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.75);
             text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 15px;
             transition: color 0.3s ease;
         }
 
-        .contact-item-value a:hover {
+        .footer-section a:hover {
             color: #FFD700;
         }
 
-        .contact-form-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 48px;
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #FFD700;
+            color: #000000;
         }
 
         /* Responsive */
@@ -859,13 +1081,16 @@
                 grid-template-columns: 1fr 1fr;
             }
             
-            .tasting-content,
-            .contact-grid {
+            .tasting-content {
                 grid-template-columns: 1fr;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
+            }
+
+            .testimonial-card {
+                min-width: calc(50% - 16px);
             }
         }
 
@@ -893,14 +1118,20 @@
                 gap: 20px;
             }
             
-            .tasting-form,
-            .contact-form-card,
-            .contact-info-card {
+            .tasting-form {
                 padding: 32px;
             }
             
             .tasting-features {
                 grid-template-columns: 1fr;
+            }
+
+            .testimonial-card {
+                min-width: 100%;
+            }
+
+            .carousel-btn {
+                display: none;
             }
         }
     </style>
@@ -922,7 +1153,7 @@
         </div>
     </nav>
 
-    <!-- Hero avec Verre de Whisky Magnifique -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-image"></div>
         <div class="hero-content">
@@ -947,7 +1178,7 @@
         </div>
     </section>
 
-    <!-- Bannière Marques Défilante -->
+    <!-- Bannière Marques -->
     <div class="brands-banner">
         <div class="brands-track">
             <span class="brand-item">GLENFIDDICH</span>
@@ -958,7 +1189,6 @@
             <span class="brand-item">ARDBEG</span>
             <span class="brand-item">BALVENIE</span>
             <span class="brand-item">GLENLIVET</span>
-            <!-- Duplication pour l'effet infini -->
             <span class="brand-item">GLENFIDDICH</span>
             <span class="brand-item">MACALLAN</span>
             <span class="brand-item">LAGAVULIN</span>
@@ -1023,6 +1253,28 @@
                     Explorer
                     <span>→</span>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Références Sélectionnées</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15k+</div>
+                <div class="stat-label">Clients Satisfaits</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Taux de Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">25</div>
+                <div class="stat-label">Années d'Expertise</div>
             </div>
         </div>
     </section>
@@ -1093,6 +1345,238 @@
         </div>
     </section>
 
+    <!-- Témoignages Carousel -->
+    <section class="testimonials-section">
+        <div class="section-header" style="text-align: center; margin: 0 auto; max-width: 800px;">
+            <div class="section-label">Témoignages</div>
+            <h2 class="section-title">Ils ont vécu l'expérience</h2>
+            <p class="section-description">
+                Découvrez ce que nos clients disent de leur voyage sensoriel.
+            </p>
+        </div>
+
+        <div class="testimonials-carousel">
+            <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">‹</button>
+            <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">›</button>
+            
+            <div class="carousel-track" id="carouselTrack">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Une expérience absolument extraordinaire. La dégustation privée m'a fait découvrir 
+                        des nuances que je n'aurais jamais perçues seul. L'expertise des sommeliers est remarquable."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div>
+                            <div class="author-name">Jean Dubois</div>
+                            <div class="author-role">Amateur de whisky depuis 15 ans</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "La philosophie des trois portes change vraiment la manière d'appréhender le whisky. 
+                        Ce n'est plus juste une boisson, c'est devenu un moment de méditation et de plaisir."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div>
+                            <div class="author-name">Sophie Martin</div>
+                            <div class="author-role">Découverte récente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "La sélection est impeccable, chaque bouteille raconte une histoire. Le service client 
+                        est exceptionnel et les conseils toujours pertinents. Je recommande vivement !"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div>
+                            <div class="author-name">Antoine Leclerc</div>
+                            <div class="author-role">Collectionneur passionné</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "J'ai offert une dégustation à mon mari pour son anniversaire. C'était magique ! 
+                        Une expérience unique qu'on n'oubliera jamais. Merci pour ce moment d'exception."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CB</div>
+                        <div>
+                            <div class="author-name">Claire Bernard</div>
+                            <div class="author-role">Cliente fidèle</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "En tant que néophyte, j'appréhendais un peu. Mais l'équipe m'a mis à l'aise immédiatement. 
+                        J'ai appris énormément et découvert des saveurs incroyables. Une révélation !"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div>
+                            <div class="author-name">Marie Rousseau</div>
+                            <div class="author-role">Débutante enthousiate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Processus Dépliante -->
+    <section class="process-section" id="philosophy">
+        <div class="section-header" style="text-align: center; margin: 0 auto; max-width: 800px;">
+            <div class="section-label">Notre Savoir-Faire</div>
+            <h2 class="section-title">Le processus de sélection</h2>
+            <p class="section-description">
+                Chaque whisky de notre collection passe par un processus rigoureux 
+                de sélection pour garantir une qualité exceptionnelle.
+            </p>
+        </div>
+
+        <div class="process-container">
+            <div class="process-item">
+                <div class="process-header" onclick="toggleProcess(this)">
+                    <div class="process-title-group">
+                        <div class="process-number">1</div>
+                        <div class="process-title">Sourcing Mondial</div>
+                    </div>
+                    <div class="process-icon">+</div>
+                </div>
+                <div class="process-content">
+                    <p class="process-description">
+                        Nous parcourons le monde à la recherche des distilleries les plus prestigieuses 
+                        et des éditions limitées les plus recherchées. Nos partenariats directs avec 
+                        les producteurs nous permettent d'accéder à des whiskys exceptionnels, 
+                        souvent indisponibles ailleurs.
+                    </p>
+                    <div class="process-highlights">
+                        <div class="highlight-item">
+                            <strong>Écosse</strong>
+                            Plus de 50 distilleries partenaires
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Japon</strong>
+                            Accès exclusif aux éditions limitées
+                        </div>
+                        <div class="highlight-item">
+                            <strong>USA</strong>
+                            Bourbons et Ryes artisanaux
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-header" onclick="toggleProcess(this)">
+                    <div class="process-title-group">
+                        <div class="process-number">2</div>
+                        <div class="process-title">Dégustation Expert</div>
+                    </div>
+                    <div class="process-icon">+</div>
+                </div>
+                <div class="process-content">
+                    <p class="process-description">
+                        Notre comité de dégustation, composé de sommeliers certifiés et de maîtres 
+                        assembleurs, évalue chaque whisky selon des critères stricts. Nous analysons 
+                        la robe, le nez, le palais et la finale pour ne retenir que l'excellence.
+                    </p>
+                    <div class="process-highlights">
+                        <div class="highlight-item">
+                            <strong>Analyse Sensorielle</strong>
+                            Plus de 20 critères évalués
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Notation</strong>
+                            Minimum 85/100 pour être sélectionné
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Traçabilité</strong>
+                            Chaque lot est documenté
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-header" onclick="toggleProcess(this)">
+                    <div class="process-title-group">
+                        <div class="process-number">3</div>
+                        <div class="process-title">Contrôle Qualité</div>
+                    </div>
+                    <div class="process-icon">+</div>
+                </div>
+                <div class="process-content">
+                    <p class="process-description">
+                        Avant d'intégrer notre catalogue, chaque bouteille subit une vérification 
+                        d'authenticité et de conditionnement. Nous vérifions les niveaux, les bouchons, 
+                        les étiquettes et la traçabilité pour garantir l'intégrité du produit.
+                    </p>
+                    <div class="process-highlights">
+                        <div class="highlight-item">
+                            <strong>Authenticité</strong>
+                            Certificats d'origine vérifiés
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Stockage</strong>
+                            Cave climatisée à 15-18°C
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Conditionnement</strong>
+                            Emballage sécurisé premium
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-item">
+                <div class="process-header" onclick="toggleProcess(this)">
+                    <div class="process-title-group">
+                        <div class="process-number">4</div>
+                        <div class="process-title">Conseil Personnalisé</div>
+                    </div>
+                    <div class="process-icon">+</div>
+                </div>
+                <div class="process-content">
+                    <p class="process-description">
+                        Notre équipe d'experts est à votre disposition pour vous guider dans vos choix. 
+                        Que vous soyez débutant ou connaisseur, nous vous accompagnons pour trouver 
+                        le whisky qui correspond à vos goûts, votre budget et l'occasion.
+                    </p>
+                    <div class="process-highlights">
+                        <div class="highlight-item">
+                            <strong>Consultation</strong>
+                            Gratuite et sans engagement
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Sur Mesure</strong>
+                            Recommandations personnalisées
+                        </div>
+                        <div class="highlight-item">
+                            <strong>Suivi</strong>
+                            Accompagnement post-achat
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Section Dégustation -->
     <section class="tasting-section" id="tasting">
         <div class="tasting-content">
@@ -1100,7 +1584,7 @@
                 <div class="section-label">Expérience Premium</div>
                 <h2>Réservez votre dégustation privée</h2>
                 <p>
-                    Plongez dans l'univers du whisky lors d'une ségustation privée 
+                    Plongez dans l'univers du whisky lors d'une dégustation privée 
                     animée par nos experts. Une expérience sur mesure pour découvrir, 
                     apprendre et savourer.
                 </p>
@@ -1267,7 +1751,7 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
+    <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-brand">
@@ -1285,10 +1769,10 @@
 
             <div class="footer-section">
                 <h4>Explorer</h4>
-                <a href="#">Notre Vision</a>
-                <a href="#">Les Trois Portes</a>
-                <a href="#">Collection</a>
-                <a href="#">À Propos</a>
+                <a href="#philosophy">Notre Vision</a>
+                <a href="#portes">Les Trois Portes</a>
+                <a href="#collection">Collection</a>
+                <a href="#tasting">Dégustations</a>
             </div>
 
             <div class="footer-section">
@@ -1296,7 +1780,7 @@
                 <a href="#">Guide de Dégustation</a>
                 <a href="#">Blog</a>
                 <a href="#">Newsletter</a>
-                <a href="#">FAQ</a>
+                <a href="#faq">FAQ</a>
             </div>
 
             <div class="footer-section">
@@ -1320,20 +1804,94 @@
     </footer>
 
     <script>
+        // FAQ Toggle
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
             const allItems = document.querySelectorAll('.faq-item');
             
-            // Fermer les autres items
             allItems.forEach(item => {
                 if (item !== faqItem && item.classList.contains('active')) {
                     item.classList.remove('active');
                 }
             });
             
-            // Toggle l'item cliqué
             faqItem.classList.toggle('active');
         }
+
+        // Process Toggle
+        function toggleProcess(element) {
+            const processItem = element.parentElement;
+            const allItems = document.querySelectorAll('.process-item');
+            
+            allItems.forEach(item => {
+                if (item !== processItem && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            processItem.classList.toggle('active');
+        }
+
+        // Carousel
+        let currentSlide = 0;
+        const track = document.getElementById('carouselTrack');
+        const cards = document.querySelectorAll('.testimonial-card');
+        const totalCards = cards.length;
+        
+        function updateCarousel() {
+            const cardWidth = cards[0].offsetWidth;
+            const gap = 32;
+            const offset = -(currentSlide * (cardWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
+        }
+
+        function moveCarousel(direction) {
+            const visibleCards = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+            const maxSlide = totalCards - visibleCards;
+            
+            currentSlide += direction;
+            
+            if (currentSlide < 0) {
+                currentSlide = 0;
+            } else if (currentSlide > maxSlide) {
+                currentSlide = maxSlide;
+            }
+            
+            updateCarousel();
+        }
+
+        // Auto-play carousel
+        setInterval(() => {
+            const visibleCards = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+            const maxSlide = totalCards - visibleCards;
+            
+            currentSlide++;
+            if (currentSlide > maxSlide) {
+                currentSlide = 0;
+            }
+            
+            updateCarousel();
+        }, 5000);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            currentSlide = 0;
+            updateCarousel();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
