@@ -3,1894 +3,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Part du Chêne | Whisky Moderne</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Smart Home Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000000;
-            color: #FFFFFF;
-            overflow-x: hidden;
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding: 16px;
+            line-height: 1.5;
         }
 
-        /* Navigation Ultra-Moderne */
-        nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-container {
-            max-width: 1600px;
+        .dashboard {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 24px 60px;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .dashboard.hidden { display: none; }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 32px;
+            padding: 8px;
         }
 
-        .logo {
-            font-family: 'Archivo', sans-serif;
-            font-size: 20px;
+        .header-info h1 {
+            font-size: 24px;
             font-weight: 700;
-            color: #FFFFFF;
-            letter-spacing: -0.5px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 48px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            letter-spacing: -0.2px;
-        }
-
-        .nav-links a:hover {
-            color: #FFFFFF;
-        }
-
-        .nav-cta {
-            background: #FFFFFF;
-            color: #000000;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .nav-cta:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px);
-        }
-
-        /* Hero avec Image Époustouflante */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%),
-                url('https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            animation: slowZoom 20s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 60px;
-            width: 100%;
-        }
-
-        .hero-badge {
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-bottom: 32px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.2s;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .hero-badge::before {
-            content: '✦';
-            color: #FFD700;
-        }
-
-        .hero-title {
-            font-family: 'Archivo', sans-serif;
-            font-size: clamp(48px, 8vw, 120px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.4s;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(18px, 2vw, 24px);
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin-bottom: 48px;
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.6s;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.8s;
-        }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); }
 
         .btn-primary {
-            background: #FFFFFF;
-            color: #000000;
-            padding: 18px 40px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+            background: var(--primary-gradient);
             border: none;
-            cursor: pointer;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #FFFFFF;
-            padding: 18px 40px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-        }
-
-        /* Bannière défilante marques */
-        .brands-banner {
-            background: rgba(255, 215, 0, 0.03);
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-            padding: 40px 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .brands-track {
-            display: flex;
-            gap: 80px;
-            animation: scroll 30s linear infinite;
-            width: fit-content;
-        }
-
-        .brand-item {
-            font-family: 'Archivo', sans-serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.4);
-            white-space: nowrap;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        .brand-item:hover {
-            color: rgba(255, 215, 0, 0.8);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Section Les 3 Portes - Cards Modernes */
-        .portes-section {
-            padding: 160px 60px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            max-width: 800px;
-            margin-bottom: 80px;
-        }
-
-        .section-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #FFD700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Archivo', sans-serif;
-            font-size: clamp(36px, 5vw, 64px);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .section-description {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.7;
-        }
-
-        .portes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 32px;
-            margin-top: 60px;
-        }
-
-        .porte-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 48px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .porte-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .porte-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
-        .porte-card:hover::before {
-            opacity: 1;
-        }
-
-        .porte-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: rgba(255, 215, 0, 0.2);
-            margin-bottom: 24px;
-        }
-
-        .porte-name {
-            font-family: 'Archivo', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .porte-text {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 32px;
-        }
-
-        .porte-link {
-            color: #FFD700;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s ease;
-        }
-
-        .porte-link:hover {
-            gap: 12px;
-        }
-
-        /* Section Stats Animée */
-        .stats-section {
-            padding: 120px 60px;
-            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats-section::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 48px;
-            position: relative;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 32px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            transition: all 0.4s ease;
-        }
-
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 215, 0, 0.3);
-            transform: translateY(-8px);
-        }
-
-        .stat-number {
-            font-family: 'Archivo', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-        }
-
-        /* Section Collection - Grille Moderne */
-        .collection-section {
-            padding: 160px 60px;
-            background: linear-gradient(180deg, #0A0A0A 0%, #000000 100%);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 32px;
-            margin-top: 80px;
-        }
-
-        .product-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 0 24px 60px rgba(255, 215, 0, 0.15);
-        }
-
-        .product-image-container {
-            height: 400px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(139, 69, 19, 0.08) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .product-1 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=800&q=80'); }
-        .product-2 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80'); }
-        .product-3 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1582818498617-544176ae8888?w=800&q=80'); }
-        .product-4 { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603899668606-c0cabd27e8a8?w=800&q=80'); }
-
-        .product-image-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
-        }
-
-        .product-info {
-            padding: 32px;
-        }
-
-        .product-category {
-            font-size: 12px;
-            font-weight: 600;
-            color: #FFD700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .product-name {
-            font-family: 'Archivo', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .product-origin {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .product-footer {
+        /* --- WEATHER --- */
+        .weather-grid {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .product-price {
-            font-size: 28px;
-            font-weight: 700;
-            color: #FFFFFF;
-        }
-
-        .product-add {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .product-add:hover {
-            background: #FFFFFF;
-            color: #000000;
-        }
-
-        /* Section Témoignages Carousel */
-        .testimonials-section {
-            padding: 160px 60px;
-            background: linear-gradient(180deg, #000000 0%, #0A0A0A 100%);
-            position: relative;
-        }
-
-        .testimonials-carousel {
-            max-width: 1400px;
-            margin: 80px auto 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            gap: 32px;
-        }
-
-        .testimonial-card {
-            min-width: calc(33.333% - 22px);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 48px;
-            flex-shrink: 0;
-        }
-
-        .stars {
-            color: #FFD700;
-            font-size: 20px;
-            margin-bottom: 24px;
-            letter-spacing: 4px;
-        }
-
-        .testimonial-text {
-            font-size: 16px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 32px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .author-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.05) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            color: #FFD700;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .author-name {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .author-role {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
-            font-size: 28px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            backdrop-filter: blur(10px);
-        }
-
-        .carousel-btn:hover {
-            background: rgba(255, 215, 0, 0.2);
-            border-color: rgba(255, 215, 0, 0.5);
-        }
-
-        .carousel-prev {
-            left: -28px;
-        }
-
-        .carousel-next {
-            right: -28px;
-        }
-
-        /* Section Processus Dépliante */
-        .process-section {
-            padding: 160px 60px;
-            background: #000000;
-        }
-
-        .process-container {
-            max-width: 1200px;
-            margin: 80px auto 0;
-        }
-
-        .process-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .process-item:hover {
-            border-color: rgba(255, 215, 0, 0.2);
-        }
-
-        .process-header {
-            padding: 32px 40px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .process-header:hover {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .process-title-group {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .process-number {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            color: #FFD700;
-            flex-shrink: 0;
-        }
-
-        .process-title {
-            font-family: 'Archivo', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #FFFFFF;
-        }
-
-        .process-icon {
-            font-size: 32px;
-            color: #FFD700;
-            transition: transform 0.3s ease;
-        }
-
-        .process-item.active .process-icon {
-            transform: rotate(45deg);
-        }
-
-        .process-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0 40px;
-        }
-
-        .process-item.active .process-content {
-            max-height: 800px;
-            padding: 0 40px 32px 120px;
-        }
-
-        .process-description {
-            color: rgba(255, 255, 255, 0.75);
-            line-height: 1.8;
-            font-size: 16px;
-            margin-bottom: 24px;
-        }
-
-        .process-highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .highlight-item {
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            border-radius: 8px;
-            padding: 16px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .highlight-item strong {
-            color: #FFD700;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        /* Section Dégustation */
-        .tasting-section {
-            padding: 160px 60px;
-            background: linear-gradient(180deg, #0A0A0A 0%, #000000 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tasting-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 300px;
-            background: radial-gradient(ellipse at top, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
-        }
-
-        .tasting-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-        }
-
-        .tasting-info h2 {
-            font-family: 'Archivo', sans-serif;
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .tasting-info p {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.7;
-            margin-bottom: 32px;
-        }
-
-        .tasting-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .feature-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: rgba(255, 215, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FFD700;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .feature-text {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .tasting-form {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 48px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 14px 16px;
-            color: #FFFFFF;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.5);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: #FFD700;
-            color: #000000;
-            padding: 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 8px;
-        }
-
-        .btn-submit:hover {
-            background: #F4E4C1;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
-        }
-
-        /* Section FAQ */
-        .faq-section {
-            padding: 160px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .faq-container {
-            margin-top: 80px;
-        }
-
-        .faq-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: rgba(255, 215, 0, 0.2);
-        }
-
-        .faq-question {
-            padding: 28px 32px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            font-size: 18px;
-            color: #FFFFFF;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            color: #FFD700;
-        }
-
-        .faq-icon {
-            font-size: 24px;
-            color: #FFD700;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0 32px;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 32px 28px 32px;
-        }
-
-        .faq-answer p {
-            color: rgba(255, 255, 255, 0.75);
-            line-height: 1.7;
-            font-size: 16px;
-        }
-
-        /* Footer Moderne */
-        footer {
-            background: #000000;
-            padding: 100px 60px 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 60px;
-        }
-
-        .footer-brand h3 {
-            font-family: 'Archivo', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .footer-section h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .footer-section a {
-            display: block;
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-            margin-bottom: 12px;
-            font-size: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #FFD700;
-        }
-
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
-        }
-
-        .social-links {
-            display: flex;
             gap: 20px;
         }
 
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .temp-display {
+            font-size: 48px;
+            font-weight: 700;
+            display: flex;
+        }
+
+        .temp-display span {
+            font-size: 24px;
+            color: var(--primary);
+            margin-top: 8px;
+        }
+
+        /* --- SCENES --- */
+        .scenes-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 24px;
+            scrollbar-width: none;
+        }
+        .scenes-row::-webkit-scrollbar { display: none; }
+
+        .scene-btn {
+            flex: 0 0 auto;
+            padding: 12px 20px;
             background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .scene-btn:hover { background: rgba(255, 255, 255, 0.12); }
+        .scene-btn:active { transform: scale(0.95); background: var(--primary); }
+
+        /* --- LIGHTS --- */
+        .lights-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .light-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--card-border);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-item.on {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .light-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-pill {
+            width: 50px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-pill::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+        }
+
+        .light-item.on .toggle-pill { background: var(--success); }
+        .light-item.on .toggle-pill::after { left: 27px; }
+
+        /* --- SLIDERS --- */
+        .control-group {
+            margin-top: 16px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hue-slider {
+            background: linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%) !important;
+            margin-top: 12px;
+        }
+
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: #FFD700;
-            color: #000000;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .tasting-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonial-card {
-                min-width: calc(50% - 16px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content {
-                padding: 0 30px;
-            }
-            
-            .portes-grid,
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .tasting-form {
-                padding: 32px;
-            }
-            
-            .tasting-features {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonial-card {
-                min-width: 100%;
-            }
-
-            .carousel-btn {
-                display: none;
-            }
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">La Part du Chêne</div>
-            <ul class="nav-links">
-                <li><a href="#philosophy">Notre Vision</a></li>
-                <li><a href="#portes">Les Portes</a></li>
-                <li><a href="#collection">Collection</a></li>
-                <li><a href="#tasting">Dégustations</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#collection" class="nav-cta">Boutique</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-image"></div>
-        <div class="hero-content">
-            <div class="hero-badge">Premium Whisky Experience</div>
-            <h1 class="hero-title">
-                L'art de la<br>
-                <span>dégustation</span>
-            </h1>
-            <p class="hero-subtitle">
-                Transformez chaque moment en une expérience sensorielle unique. 
-                Découvrez le whisky autrement, avec passion et authenticité.
-            </p>
-            <div class="hero-cta-group">
-                <a href="#collection" class="btn-primary">
-                    Découvrir la collection
-                    <span>→</span>
-                </a>
-                <a href="#portes" class="btn-secondary">
-                    Notre approche
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bannière Marques -->
-    <div class="brands-banner">
-        <div class="brands-track">
-            <span class="brand-item">GLENFIDDICH</span>
-            <span class="brand-item">MACALLAN</span>
-            <span class="brand-item">LAGAVULIN</span>
-            <span class="brand-item">TALISKER</span>
-            <span class="brand-item">HIGHLAND PARK</span>
-            <span class="brand-item">ARDBEG</span>
-            <span class="brand-item">BALVENIE</span>
-            <span class="brand-item">GLENLIVET</span>
-            <span class="brand-item">GLENFIDDICH</span>
-            <span class="brand-item">MACALLAN</span>
-            <span class="brand-item">LAGAVULIN</span>
-            <span class="brand-item">TALISKER</span>
-            <span class="brand-item">HIGHLAND PARK</span>
-            <span class="brand-item">ARDBEG</span>
-            <span class="brand-item">BALVENIE</span>
-            <span class="brand-item">GLENLIVET</span>
+    <div id="loginOverlay" class="login-overlay">
+        <div class="card" style="width: 100%; max-width: 400px; text-align: center;">
+            <div style="margin-bottom: 24px; color: var(--primary);"><i data-lucide="shield-check" style="width: 48px; height: 48px;"></i></div>
+            <h2 style="margin-bottom: 8px;">Authentification</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Connectez votre instance Home Assistant</p>
+            <input type="password" id="haToken" placeholder="Token d'accès longue durée..." style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); padding: 16px; border-radius: 16px; color: white; margin-bottom: 16px; font-size: 14px;">
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 16px;" onclick="connectHA()">
+                Déverrouiller le Dashboard
+            </button>
         </div>
     </div>
 
-    <!-- Les 3 Portes -->
-    <section class="portes-section" id="portes">
-        <div class="section-header">
-            <div class="section-label">Notre Philosophie</div>
-            <h2 class="section-title">Trois portes vers l'excellence</h2>
-            <p class="section-description">
-                Notre approche unique combine expertise technique, 
-                sensibilité émotionnelle et action réfléchie pour vous offrir 
-                une expérience de dégustation incomparable.
-            </p>
-        </div>
-
-        <div class="portes-grid">
-            <div class="porte-card">
-                <div class="porte-number">01</div>
-                <h3 class="porte-name">Comprendre</h3>
-                <p class="porte-text">
-                    Maîtrisez l'art de la dégustation. Explorez les arômes, 
-                    les textures et les techniques qui transforment chaque verre 
-                    en une expérience d'apprentissage fascinante.
-                </p>
-                <a href="#" class="porte-link">
-                    En savoir plus
-                    <span>→</span>
-                </a>
+    <div id="mainDashboard" class="dashboard hidden">
+        <header class="header">
+            <div class="header-info">
+                <h1 id="welcomeText">Dashboard Intelligent</h1>
+                <p id="liveClock" style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">--:--:--</p>
             </div>
-
-            <div class="porte-card">
-                <div class="porte-number">02</div>
-                <h3 class="porte-name">Ressentir</h3>
-                <p class="porte-text">
-                    Connectez-vous à vos émotions. Le whisky devient un miroir, 
-                    une invitation à ralentir et à explorer ce qui résonne 
-                    profondément en vous.
-                </p>
-                <a href="#" class="porte-link">
-                    Découvrir
-                    <span>→</span>
-                </a>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn" onclick="refreshData()"><i data-lucide="rotate-cw" style="width: 18px;"></i></button>
+                <button class="btn" onclick="logout()"><i data-lucide="log-out" style="width: 18px;"></i></button>
             </div>
+        </header>
 
-            <div class="porte-card">
-                <div class="porte-number">03</div>
-                <h3 class="porte-name">Choisir</h3>
-                <p class="porte-text">
-                    Passez de l'intention à l'action. Sélectionnez avec 
-                    discernement le whisky qui correspond à votre moment, 
-                    votre humeur, votre quête personnelle.
-                </p>
-                <a href="#" class="porte-link">
-                    Explorer
-                    <span>→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Références Sélectionnées</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">15k+</div>
-                <div class="stat-label">Clients Satisfaits</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Taux de Satisfaction</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">25</div>
-                <div class="stat-label">Années d'Expertise</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Collection -->
-    <section class="collection-section" id="collection">
-        <div class="section-header">
-            <div class="section-label">Notre Sélection</div>
-            <h2 class="section-title">Des whiskys d'exception</h2>
-            <p class="section-description">
-                Chaque bouteille est choisie avec soin pour vous accompagner 
-                dans votre voyage sensoriel. Authenticité, qualité et caractère.
-            </p>
-        </div>
-
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image-container product-1"></div>
-                <div class="product-info">
-                    <div class="product-category">Single Malt</div>
-                    <h3 class="product-name">Highland Storm</h3>
-                    <p class="product-origin">Écosse • 15 ans d'âge</p>
-                    <div class="product-footer">
-                        <div class="product-price">89€</div>
-                        <div class="product-add">+</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-container product-2"></div>
-                <div class="product-info">
-                    <div class="product-category">Bourbon</div>
-                    <h3 class="product-name">Oak Legacy</h3>
-                    <p class="product-origin">Kentucky • Small Batch</p>
-                    <div class="product-footer">
-                        <div class="product-price">125€</div>
-                        <div class="product-add">+</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-container product-3"></div>
-                <div class="product-info">
-                    <div class="product-category">Islay</div>
-                    <h3 class="product-name">Peat & Ember</h3>
-                    <p class="product-origin">Écosse • Tourbé intense</p>
-                    <div class="product-footer">
-                        <div class="product-price">145€</div>
-                        <div class="product-add">+</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-container product-4"></div>
-                <div class="product-info">
-                    <div class="product-category">Rye</div>
-                    <h3 class="product-name">Golden Harvest</h3>
-                    <p class="product-origin">Canada • Édition limitée</p>
-                    <div class="product-footer">
-                        <div class="product-price">95€</div>
-                        <div class="product-add">+</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Témoignages Carousel -->
-    <section class="testimonials-section">
-        <div class="section-header" style="text-align: center; margin: 0 auto; max-width: 800px;">
-            <div class="section-label">Témoignages</div>
-            <h2 class="section-title">Ils ont vécu l'expérience</h2>
-            <p class="section-description">
-                Découvrez ce que nos clients disent de leur voyage sensoriel.
-            </p>
-        </div>
-
-        <div class="testimonials-carousel">
-            <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">‹</button>
-            <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">›</button>
-            
-            <div class="carousel-track" id="carouselTrack">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Une expérience absolument extraordinaire. La dégustation privée m'a fait découvrir 
-                        des nuances que je n'aurais jamais perçues seul. L'expertise des sommeliers est remarquable."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div>
-                            <div class="author-name">Jean Dubois</div>
-                            <div class="author-role">Amateur de whisky depuis 15 ans</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "La philosophie des trois portes change vraiment la manière d'appréhender le whisky. 
-                        Ce n'est plus juste une boisson, c'est devenu un moment de méditation et de plaisir."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div>
-                            <div class="author-name">Sophie Martin</div>
-                            <div class="author-role">Découverte récente</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "La sélection est impeccable, chaque bouteille raconte une histoire. Le service client 
-                        est exceptionnel et les conseils toujours pertinents. Je recommande vivement !"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AL</div>
-                        <div>
-                            <div class="author-name">Antoine Leclerc</div>
-                            <div class="author-role">Collectionneur passionné</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "J'ai offert une dégustation à mon mari pour son anniversaire. C'était magique ! 
-                        Une expérience unique qu'on n'oubliera jamais. Merci pour ce moment d'exception."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">CB</div>
-                        <div>
-                            <div class="author-name">Claire Bernard</div>
-                            <div class="author-role">Cliente fidèle</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "En tant que néophyte, j'appréhendais un peu. Mais l'équipe m'a mis à l'aise immédiatement. 
-                        J'ai appris énormément et découvert des saveurs incroyables. Une révélation !"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
-                        <div>
-                            <div class="author-name">Marie Rousseau</div>
-                            <div class="author-role">Débutante enthousiate</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Processus Dépliante -->
-    <section class="process-section" id="philosophy">
-        <div class="section-header" style="text-align: center; margin: 0 auto; max-width: 800px;">
-            <div class="section-label">Notre Savoir-Faire</div>
-            <h2 class="section-title">Le processus de sélection</h2>
-            <p class="section-description">
-                Chaque whisky de notre collection passe par un processus rigoureux 
-                de sélection pour garantir une qualité exceptionnelle.
-            </p>
-        </div>
-
-        <div class="process-container">
-            <div class="process-item">
-                <div class="process-header" onclick="toggleProcess(this)">
-                    <div class="process-title-group">
-                        <div class="process-number">1</div>
-                        <div class="process-title">Sourcing Mondial</div>
-                    </div>
-                    <div class="process-icon">+</div>
-                </div>
-                <div class="process-content">
-                    <p class="process-description">
-                        Nous parcourons le monde à la recherche des distilleries les plus prestigieuses 
-                        et des éditions limitées les plus recherchées. Nos partenariats directs avec 
-                        les producteurs nous permettent d'accéder à des whiskys exceptionnels, 
-                        souvent indisponibles ailleurs.
-                    </p>
-                    <div class="process-highlights">
-                        <div class="highlight-item">
-                            <strong>Écosse</strong>
-                            Plus de 50 distilleries partenaires
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Japon</strong>
-                            Accès exclusif aux éditions limitées
-                        </div>
-                        <div class="highlight-item">
-                            <strong>USA</strong>
-                            Bourbons et Ryes artisanaux
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="process-item">
-                <div class="process-header" onclick="toggleProcess(this)">
-                    <div class="process-title-group">
-                        <div class="process-number">2</div>
-                        <div class="process-title">Dégustation Expert</div>
-                    </div>
-                    <div class="process-icon">+</div>
-                </div>
-                <div class="process-content">
-                    <p class="process-description">
-                        Notre comité de dégustation, composé de sommeliers certifiés et de maîtres 
-                        assembleurs, évalue chaque whisky selon des critères stricts. Nous analysons 
-                        la robe, le nez, le palais et la finale pour ne retenir que l'excellence.
-                    </p>
-                    <div class="process-highlights">
-                        <div class="highlight-item">
-                            <strong>Analyse Sensorielle</strong>
-                            Plus de 20 critères évalués
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Notation</strong>
-                            Minimum 85/100 pour être sélectionné
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Traçabilité</strong>
-                            Chaque lot est documenté
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="process-item">
-                <div class="process-header" onclick="toggleProcess(this)">
-                    <div class="process-title-group">
-                        <div class="process-number">3</div>
-                        <div class="process-title">Contrôle Qualité</div>
-                    </div>
-                    <div class="process-icon">+</div>
-                </div>
-                <div class="process-content">
-                    <p class="process-description">
-                        Avant d'intégrer notre catalogue, chaque bouteille subit une vérification 
-                        d'authenticité et de conditionnement. Nous vérifions les niveaux, les bouchons, 
-                        les étiquettes et la traçabilité pour garantir l'intégrité du produit.
-                    </p>
-                    <div class="process-highlights">
-                        <div class="highlight-item">
-                            <strong>Authenticité</strong>
-                            Certificats d'origine vérifiés
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Stockage</strong>
-                            Cave climatisée à 15-18°C
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Conditionnement</strong>
-                            Emballage sécurisé premium
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="process-item">
-                <div class="process-header" onclick="toggleProcess(this)">
-                    <div class="process-title-group">
-                        <div class="process-number">4</div>
-                        <div class="process-title">Conseil Personnalisé</div>
-                    </div>
-                    <div class="process-icon">+</div>
-                </div>
-                <div class="process-content">
-                    <p class="process-description">
-                        Notre équipe d'experts est à votre disposition pour vous guider dans vos choix. 
-                        Que vous soyez débutant ou connaisseur, nous vous accompagnons pour trouver 
-                        le whisky qui correspond à vos goûts, votre budget et l'occasion.
-                    </p>
-                    <div class="process-highlights">
-                        <div class="highlight-item">
-                            <strong>Consultation</strong>
-                            Gratuite et sans engagement
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Sur Mesure</strong>
-                            Recommandations personnalisées
-                        </div>
-                        <div class="highlight-item">
-                            <strong>Suivi</strong>
-                            Accompagnement post-achat
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Dégustation -->
-    <section class="tasting-section" id="tasting">
-        <div class="tasting-content">
-            <div class="tasting-info">
-                <div class="section-label">Expérience Premium</div>
-                <h2>Réservez votre dégustation privée</h2>
-                <p>
-                    Plongez dans l'univers du whisky lors d'une dégustation privée 
-                    animée par nos experts. Une expérience sur mesure pour découvrir, 
-                    apprendre et savourer.
-                </p>
-                
-                <div class="tasting-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">Dégustations guidées par des experts</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">Sélection de 5 à 8 whiskys premium</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">Séances privées ou en petit groupe</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">✓</div>
-                        <div class="feature-text">Accompagnements gastronomiques</div>
-                    </div>
-                </div>
-
-                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.7);">
-                    💰 À partir de <strong style="color: #FFD700;">120€</strong> par personne<br>
-                    ⏱️ Durée : 2h à 3h<br>
-                    👥 2 à 12 personnes
-                </p>
-            </div>
-
-            <div class="tasting-form">
-                <h3 style="font-size: 24px; margin-bottom: 24px; font-weight: 600;">Réserver une séance</h3>
-                
-                <form>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Prénom *</label>
-                            <input type="text" required placeholder="Jean">
-                        </div>
-                        <div class="form-group">
-                            <label>Nom *</label>
-                            <input type="text" required placeholder="Dupont">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" required placeholder="jean.dupont@email.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Téléphone *</label>
-                        <input type="tel" required placeholder="+33 6 12 34 56 78">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Date souhaitée *</label>
-                            <input type="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre de personnes *</label>
-                            <select required>
-                                <option value="">Sélectionner</option>
-                                <option value="2">2 personnes</option>
-                                <option value="3">3 personnes</option>
-                                <option value="4">4 personnes</option>
-                                <option value="5">5 personnes</option>
-                                <option value="6">6 personnes</option>
-                                <option value="8">8 personnes</option>
-                                <option value="10">10 personnes</option>
-                                <option value="12">12 personnes</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Message (optionnel)</label>
-                        <textarea placeholder="Parlez-nous de vos préférences, niveau d'expertise, occasion spéciale..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">
-                        Envoyer la demande de réservation
-                    </button>
-
-                    <p style="font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-top: 16px; text-align: center;">
-                        Nous vous répondrons sous 24h pour confirmer la disponibilité
-                    </p>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section" id="faq">
-        <div class="section-header" style="text-align: center; margin: 0 auto;">
-            <div class="section-label">Questions Fréquentes</div>
-            <h2 class="section-title">Tout ce que vous devez savoir</h2>
-            <p class="section-description">
-                Vous avez des questions ? Nous avons les réponses.
-            </p>
-        </div>
-
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Comment choisir le bon whisky pour débuter ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Pour débuter, nous recommandons des whiskys doux et accessibles comme les single malts des Highlands ou des Speyside. Évitez les whiskys très tourbés d'Islay qui peuvent être trop intenses. Notre équipe est disponible pour vous guider selon vos préférences gustatives.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Quelle est la différence entre single malt et blended ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Un single malt provient d'une seule distillerie et utilise uniquement de l'orge maltée. Un blended whisky mélange des whiskys de grain et de malt de différentes distilleries. Les single malts offrent généralement plus de caractère et de complexité.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Comment conserver correctement une bouteille de whisky ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Conservez vos bouteilles debout, à l'abri de la lumière directe et des variations de température. Une fois ouverte, une bouteille se conserve plusieurs années si elle est bien fermée. Évitez de la stocker près d'une source de chaleur.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Livrez-vous partout en France ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Oui, nous livrons dans toute la France métropolitaine sous 48 à 72h. Les frais de port sont offerts à partir de 150€ d'achat. Nous travaillons avec des transporteurs spécialisés pour garantir une livraison sécurisée de vos bouteilles.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Puis-je offrir une dégustation en cadeau ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolument ! Nous proposons des bons cadeaux pour nos dégustations privées. C'est le cadeau parfait pour un amateur de whisky. Le bon est valable 1 an et la date peut être choisie librement par le bénéficiaire.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Organisez-vous des événements d'entreprise ?</span>
-                    <span class="faq-icon">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Oui, nous organisons des dégustations pour groupes et événements d'entreprise (team building, séminaires, etc.). Contactez-nous pour un devis personnalisé adapté à vos besoins et au nombre de participants.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3>La Part du Chêne</h3>
-                <p>
-                    Redéfinir l'expérience du whisky à travers 
-                    une approche moderne, authentique et passionnée.
-                </p>
-                <div class="social-links">
-                    <a href="#">𝕏</a>
-                    <a href="#">IG</a>
-                    <a href="#">FB</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h4>Explorer</h4>
-                <a href="#philosophy">Notre Vision</a>
-                <a href="#portes">Les Trois Portes</a>
-                <a href="#collection">Collection</a>
-                <a href="#tasting">Dégustations</a>
-            </div>
-
-            <div class="footer-section">
-                <h4>Ressources</h4>
-                <a href="#">Guide de Dégustation</a>
-                <a href="#">Blog</a>
-                <a href="#">Newsletter</a>
-                <a href="#faq">FAQ</a>
-            </div>
-
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <a href="mailto:hello@lapartduchene.com">hello@lapartduchene.com</a>
-                <a href="tel:+33123456789">+33 1 23 45 67 89</a>
-                <a href="#">Paris, France</a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
+        <!-- Météo Dynamique -->
+        <section class="card weather-grid">
             <div>
-                © 2026 La Part du Chêne. Tous droits réservés. 
-                <span style="margin-left: 16px; opacity: 0.6;">L'abus d'alcool est dangereux pour la santé.</span>
+                <div class="temp-display" id="currentTemp">--<span>°C</span></div>
+                <p id="weatherDesc" style="font-weight: 600; font-size: 18px; margin: 4px 0;">Récupération météo...</p>
+                <div style="display: flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 13px;">
+                    <i data-lucide="map-pin" style="width: 14px;"></i>
+                    <span id="cityName">Recherche de la position...</span>
+                </div>
             </div>
-            <div>
-                <a href="#" style="color: inherit; text-decoration: none; margin-right: 20px;">Mentions légales</a>
-                <a href="#" style="color: inherit; text-decoration: none;">Confidentialité</a>
+            <div id="weatherIconContainer" style="font-size: 48px; color: var(--warning);">
+                <i data-lucide="cloud-sun" style="width: 56px; height: 56px;"></i>
             </div>
+        </section>
+
+        <h3 style="margin-bottom: 16px; font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;">Scènes de la maison</h3>
+        <div class="scenes-row" id="scenesContainer">
+            <button class="scene-btn" onclick="activateScene('scene.cinema')"><i data-lucide="tv"></i> Mode Cinéma</button>
+            <button class="scene-btn" onclick="activateScene('scene.lecture')"><i data-lucide="book-open"></i> Lecture</button>
+            <button class="scene-btn" onclick="activateScene('scene.soiree')"><i data-lucide="party-popper"></i> Soirée</button>
+            <button class="scene-btn" onclick="activateScene('scene.travail')"><i data-lucide="briefcase"></i> Travail</button>
+            <button class="scene-btn" onclick="activateScene('scene.nuit')"><i data-lucide="moon"></i> Bonne Nuit</button>
         </div>
-    </footer>
+
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding: 0 4px;">
+            <h2 style="font-size: 20px;">Gestion des Lumières</h2>
+            <div id="lightsStatus" style="color: var(--primary); font-weight: 600; font-size: 14px; background: rgba(99, 102, 241, 0.1); padding: 4px 12px; border-radius: 20px;">Chargement...</div>
+        </div>
+        
+        <section class="lights-container" id="lightsContainer"></section>
+    </div>
 
     <script>
-        // FAQ Toggle
-        function toggleFAQ(element) {
-            const faqItem = element.parentElement;
-            const allItems = document.querySelectorAll('.faq-item');
-            
-            allItems.forEach(item => {
-                if (item !== faqItem && item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
-            });
-            
-            faqItem.classList.toggle('active');
-        }
+        const haUrl = 'http://192.168.0.12:8123';
+        let haToken = localStorage.getItem('haToken') || '';
+        let lights = [];
+        let isHandlingAction = false;
+        let userInteracting = {};
 
-        // Process Toggle
-        function toggleProcess(element) {
-            const processItem = element.parentElement;
-            const allItems = document.querySelectorAll('.process-item');
-            
-            allItems.forEach(item => {
-                if (item !== processItem && item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
-            });
-            
-            processItem.classList.toggle('active');
-        }
+        const weatherMap = {
+            0: { desc: 'Ciel dégagé', icon: 'sun' },
+            1: { desc: 'Dégagé', icon: 'sun' },
+            2: { desc: 'Partiellement nuageux', icon: 'cloud-sun' },
+            3: { desc: 'Couvert', icon: 'cloud' },
+            45: { desc: 'Brouillard', icon: 'cloud-fog' },
+            61: { desc: 'Pluie faible', icon: 'cloud-rain' },
+            95: { desc: 'Orage', icon: 'cloud-lightning' }
+        };
 
-        // Carousel
-        let currentSlide = 0;
-        const track = document.getElementById('carouselTrack');
-        const cards = document.querySelectorAll('.testimonial-card');
-        const totalCards = cards.length;
-        
-        function updateCarousel() {
-            const cardWidth = cards[0].offsetWidth;
-            const gap = 32;
-            const offset = -(currentSlide * (cardWidth + gap));
-            track.style.transform = `translateX(${offset}px)`;
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('liveClock').textContent = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' • ' + now.toLocaleTimeString('fr-FR');
         }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        function moveCarousel(direction) {
-            const visibleCards = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
-            const maxSlide = totalCards - visibleCards;
+        async function connectHA() {
+            const tokenInput = document.getElementById('haToken').value.trim();
+            if (!tokenInput) return;
+            haToken = tokenInput;
             
-            currentSlide += direction;
-            
-            if (currentSlide < 0) {
-                currentSlide = 0;
-            } else if (currentSlide > maxSlide) {
-                currentSlide = maxSlide;
+            if (await refreshData()) {
+                localStorage.setItem('haToken', haToken);
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainDashboard').classList.remove('hidden');
+                lucide.createIcons();
+                // Polling optimisé toutes les 1.5s pour synchro temps réel
+                setInterval(refreshData, 1500);
+            } else {
+                alert("Impossible de se connecter. Vérifiez votre token.");
             }
-            
-            updateCarousel();
         }
 
-        // Auto-play carousel
-        setInterval(() => {
-            const visibleCards = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
-            const maxSlide = totalCards - visibleCards;
-            
-            currentSlide++;
-            if (currentSlide > maxSlide) {
-                currentSlide = 0;
-            }
-            
-            updateCarousel();
-        }, 5000);
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            currentSlide = 0;
-            updateCarousel();
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        async function refreshData() {
+            try {
+                const response = await fetch(`${haUrl}/api/states`, {
+                    headers: { 'Authorization': `Bearer ${haToken}` }
+                });
+                if (!response.ok) return false;
+                const states = await response.json();
+                const newLights = states.filter(e => e.entity_id.startsWith('light.'));
+                
+                // Détection intelligente des changements
+                const hasChanges = detectChanges(lights, newLights);
+                
+                if (hasChanges || lights.length !== newLights.length) {
+                    const oldLights = [...lights];
+                    lights = newLights;
+                    
+                    if (!isHandlingAction) {
+                        renderLights();
+                    } else {
+                        // Mise à jour silencieuse pendant action utilisateur
+                        updateLightStates(oldLights, newLights);
+                    }
                 }
+                
+                updateWeather();
+                updateUI();
+                return true;
+            } catch (e) { 
+                console.error("Erreur refresh:", e);
+                return false; 
+            }
+        }
+
+        function detectChanges(oldLights, newLights) {
+            if (oldLights.length !== newLights.length) return true;
+            
+            return newLights.some((newLight, i) => {
+                const oldLight = oldLights.find(l => l.entity_id === newLight.entity_id);
+                if (!oldLight) return true;
+                
+                // Comparer état, luminosité et couleur
+                return newLight.state !== oldLight.state ||
+                       newLight.attributes.brightness !== oldLight.attributes.brightness ||
+                       JSON.stringify(newLight.attributes.hs_color) !== JSON.stringify(oldLight.attributes.hs_color);
             });
+        }
+
+        function updateLightStates(oldLights, newLights) {
+            newLights.forEach(newLight => {
+                // Ne pas mettre à jour si l'utilisateur interagit avec ce contrôle
+                if (userInteracting[newLight.entity_id]) return;
+                
+                const card = document.getElementById(`card-${newLight.entity_id}`);
+                const brightnessLabel = document.getElementById(`brightness-${newLight.entity_id}`);
+                const brightnessSlider = document.getElementById(`slider-brightness-${newLight.entity_id}`);
+                const hueSlider = document.getElementById(`slider-hue-${newLight.entity_id}`);
+                
+                if (!card) return;
+                
+                const isOn = newLight.state === 'on';
+                const brightness = newLight.attributes.brightness ? Math.round((newLight.attributes.brightness / 255) * 100) : 0;
+                const hue = newLight.attributes.hs_color ? Math.round(newLight.attributes.hs_color[0]) : 0;
+                
+                // Mise à jour visuelle
+                if (isOn) card.classList.add('on');
+                else card.classList.remove('on');
+                
+                // Mise à jour des contrôles
+                if (brightnessLabel) brightnessLabel.textContent = `${brightness}%`;
+                if (brightnessSlider) brightnessSlider.value = brightness;
+                if (hueSlider) hueSlider.value = hue;
+            });
+        }
+
+        function updateUI() {
+            const onCount = lights.filter(l => l.state === 'on').length;
+            document.getElementById('lightsStatus').textContent = onCount > 0 ? `${onCount} active(s)` : 'Toutes éteintes';
+        }
+
+        function renderLights() {
+            const container = document.getElementById('lightsContainer');
+            container.innerHTML = lights.map(light => {
+                const isOn = light.state === 'on';
+                const brightness = light.attributes.brightness ? Math.round((light.attributes.brightness / 255) * 100) : 0;
+                const supportsColor = light.attributes.supported_color_modes?.some(m => ['hs', 'rgb', 'xy'].includes(m));
+                const currentHue = light.attributes.hs_color ? Math.round(light.attributes.hs_color[0]) : 0;
+
+                return `
+                    <div class="light-item ${isOn ? 'on' : ''}" id="card-${light.entity_id}">
+                        <div class="light-top">
+                            <div style="font-weight: 700; font-size: 16px;">${light.attributes.friendly_name}</div>
+                            <div class="toggle-pill" onclick="handleToggle('${light.entity_id}')"></div>
+                        </div>
+                        <div class="control-group">
+                            <div class="slider-label"><span>Intensité</span><span id="brightness-${light.entity_id}">${brightness}%</span></div>
+                            <input type="range" min="0" max="100" value="${brightness}" id="slider-brightness-${light.entity_id}"
+                                onmousedown="startInteraction('${light.entity_id}')"
+                                ontouchstart="startInteraction('${light.entity_id}')"
+                                oninput="syncLocalBrightness('${light.entity_id}', this.value)"
+                                onchange="commitBrightness('${light.entity_id}', this.value)"
+                                onmouseup="endInteraction('${light.entity_id}')"
+                                ontouchend="endInteraction('${light.entity_id}')">
+                        </div>
+                        ${supportsColor ? `
+                        <div class="control-group">
+                            <div class="slider-label"><span>Ambiance couleur</span></div>
+                            <input type="range" class="hue-slider" min="0" max="360" value="${currentHue}" id="slider-hue-${light.entity_id}"
+                                onmousedown="startInteraction('${light.entity_id}')"
+                                ontouchstart="startInteraction('${light.entity_id}')"
+                                oninput="syncLocalHue('${light.entity_id}', this.value)"
+                                onchange="commitHue('${light.entity_id}', this.value)"
+                                onmouseup="endInteraction('${light.entity_id}')"
+                                ontouchend="endInteraction('${light.entity_id}')">
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        function startInteraction(entityId) {
+            userInteracting[entityId] = true;
+        }
+
+        function endInteraction(entityId) {
+            setTimeout(() => {
+                userInteracting[entityId] = false;
+            }, 50);
+        }
+
+        // --- GESTION INSTANTANÉE (ZÉRO DÉLAI) ---
+        function syncLocalBrightness(entityId, value) {
+            const card = document.getElementById(`card-${entityId}`);
+            const light = lights.find(l => l.entity_id === entityId);
+            const label = document.getElementById(`brightness-${entityId}`);
+            
+            if (!card || !light || !label) return;
+
+            label.textContent = `${value}%`;
+            
+            if (value > 0) {
+                card.classList.add('on');
+                light.state = 'on';
+                light.attributes.brightness = Math.round((value / 100) * 255);
+            } else {
+                card.classList.remove('on');
+                light.state = 'off';
+                light.attributes.brightness = 0;
+            }
+            updateUI();
+        }
+
+        function syncLocalHue(entityId, value) {
+            const light = lights.find(l => l.entity_id === entityId);
+            if (light && light.attributes) {
+                light.attributes.hs_color = [parseInt(value), 100];
+            }
+        }
+
+        async function commitBrightness(entityId, value) {
+            // Pas de blocage, envoi immédiat en arrière-plan
+            if (value > 0) {
+                callService('light', 'turn_on', { entity_id: entityId, brightness_pct: parseInt(value) });
+            } else {
+                callService('light', 'turn_off', { entity_id: entityId });
+            }
+        }
+
+        async function commitHue(entityId, value) {
+            // Pas de blocage, envoi immédiat en arrière-plan
+            const rgb = hslToRgb(parseInt(value), 100, 50);
+            callService('light', 'turn_on', { entity_id: entityId, rgb_color: rgb });
+        }
+
+        async function handleToggle(entityId) {
+            const light = lights.find(l => l.entity_id === entityId);
+            if (!light) return;
+            
+            const newState = light.state === 'on' ? 'off' : 'on';
+            
+            // UI Immédiate
+            const card = document.getElementById(`card-${entityId}`);
+            if (card) {
+                if (newState === 'on') card.classList.add('on');
+                else card.classList.remove('on');
+            }
+            light.state = newState;
+            updateUI();
+            
+            // Envoi commande en arrière-plan sans bloquer
+            callService('light', newState === 'on' ? 'turn_on' : 'turn_off', { entity_id: entityId });
+        }
+
+        async function activateScene(sceneId) {
+            isHandlingAction = true;
+            try {
+                await callService('scene', 'turn_on', { entity_id: sceneId });
+            } finally {
+                // Rafraîchissement après délai pour laisser le temps aux entités de changer
+                setTimeout(() => { 
+                    isHandlingAction = false; 
+                    refreshData();
+                }, 600);
+            }
+        }
+
+        async function callService(domain, service, data) {
+            try {
+                const response = await fetch(`${haUrl}/api/services/${domain}/${service}`, {
+                    method: 'POST',
+                    headers: { 
+                        'Authorization': `Bearer ${haToken}`, 
+                        'Content-Type': 'application/json' 
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    console.error(`Erreur service ${domain}.${service}:`, response.status);
+                }
+                
+                return response.ok;
+            } catch (e) { 
+                console.error(`Erreur Service HA ${domain}.${service}:`, e);
+                return false;
+            }
+        }
+
+        function hslToRgb(h, s, l) {
+            h /= 360; s /= 100; l /= 100;
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1; if (t > 1) t -= 1;
+                if (t < 1/6) return p + (q - p) * 6 * t;
+                if (t < 1/2) return q;
+                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+            return [
+                Math.round(hue2rgb(p, q, h + 1/3) * 255), 
+                Math.round(hue2rgb(p, q, h) * 255), 
+                Math.round(hue2rgb(p, q, h - 1/3) * 255)
+            ];
+        }
+
+        async function updateWeather() {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                const { latitude, longitude } = pos.coords;
+                
+                try {
+                    // Météo
+                    const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`);
+                    const weatherData = await weatherRes.json();
+                    
+                    const temp = Math.round(weatherData.current.temperature_2m);
+                    const info = weatherMap[weatherData.current.weather_code] || { desc: 'Partiellement nuageux', icon: 'cloud-sun' };
+
+                    document.getElementById('currentTemp').innerHTML = `${temp}<span>°C</span>`;
+                    document.getElementById('weatherDesc').textContent = info.desc;
+                    document.getElementById('weatherIconContainer').innerHTML = `<i data-lucide="${info.icon}" style="width: 56px; height: 56px;"></i>`;
+                    
+                    // Géocodage Ville (une seule fois)
+                    const cityEl = document.getElementById('cityName');
+                    if (cityEl && !cityEl.hasAttribute('data-done')) {
+                        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const geoData = await geoRes.json();
+                        const city = geoData.address.city || geoData.address.town || geoData.address.village || "Ma Position";
+                        cityEl.textContent = city;
+                        cityEl.setAttribute('data-done', 'true');
+                    }
+                    lucide.createIcons();
+                } catch(e) {
+                    console.error("Erreur météo:", e);
+                }
+            }, (err) => {
+                console.warn("Géolocalisation refusée:", err);
+                document.getElementById('cityName').textContent = "Position non disponible";
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('haToken');
+            location.reload();
+        }
+
+        window.addEventListener('load', () => { 
+            if (haToken) connectHA(); 
+            lucide.createIcons();
         });
     </script>
 </body>
