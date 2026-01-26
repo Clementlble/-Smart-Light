@@ -13,11 +13,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        body {
+        html,body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #0a0a0a;
             color: #ffffff;
             scroll-behavior: smooth;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
         }
 
         .glass {
@@ -272,7 +275,7 @@
 
     <!-- Hero Section --> 
      <section id="hero" class="py-32 bg-white/5 relative overflow-hidden ">
-        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center  padding-top : 7re;">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
                 <div class="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full mb-6">
                     <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
