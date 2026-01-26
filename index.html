@@ -12,227 +12,270 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <style>
-        html,body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            scroll-behavior: smooth;
-            max-width: 100%;
-            overflow-x: hidden;
-            position: relative;
-        }
+ <style>
+    /* --- CONFIGURATION GLOBALE --- */
+    html, body {
+        font-family: 'Space Grotesk', sans-serif;
+        background-color: #0a0a0a;
+        color: #ffffff;
+        scroll-behavior: smooth;
+        max-width: 100%;
+        overflow-x: hidden; /* Empêche le scroll horizontal parasite */
+        position: relative;
+    }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+    /* Protection supplémentaire pour les sections avec des éléments qui dépassent (AOS/Blobs) */
+    section {
+        position: relative;
+        overflow: hidden;
+    }
 
-        .text-gradient {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    /* --- EFFETS VISUELS & GRADIENTS --- */
+    .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .bg-gradient-custom {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-        }
+    .text-gradient {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    .bg-gradient-custom {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    }
 
-        .card-hover:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(99, 102, 241, 0.4);
-        }
+    .blob {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(60px);
+        pointer-events: none;
+    }
 
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(60px);
-            pointer-events: none;
-        }
+    /* --- INTERACTION & ANIMATIONS --- */
+    .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-        #cursor {
-            width: 20px;
-            height: 20px;
-            background: #ffffff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.15s ease-out;
-            display: none;
-        }
-        
-        @media (pointer: fine) {
-            #cursor { display: block; }
-        }
+    .card-hover:hover {
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(99, 102, 241, 0.4);
+    }
 
-        .step-number {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1;
-            opacity: 0.1;
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
 
-        .nav-scrolled {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    .float-animation {
+        animation: float 6s ease-in-out infinite;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+    /* --- NAVIGATION --- */
+    .nav-scrolled {
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
+    /* --- MENU MOBILE MODERNE (BLUR & CASCADE) --- */
+    #mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 60;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        #mobile-menu {
-            transition: all 0.4s ease-in-out;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-20px);
-        }
-        #mobile-menu.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
+    #mobile-menu.active {
+        opacity: 1;
+        pointer-events: all;
+    }
 
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
-        .faq-item.active .faq-content {
-            max-height: 200px;
-            padding-top: 1rem;
-        }
-        .faq-item.active i {
-            transform: rotate(180deg);
-        }
+    .mobile-link {
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        color: #ffffff;
+        text-decoration: none;
+        transition: transform 0.3s ease, color 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
 
-        .tech-pill {
-            padding: 0.75rem 1.5rem;
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.3s ease;
-        }
-        .tech-pill:hover {
-            border-color: #6366f1;
-            background: rgba(99, 102, 241, 0.05);
-        }
+    #mobile-menu.active .mobile-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-        .benefit-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+    /* Délais pour l'effet de cascade */
+    #mobile-menu.active .mobile-link:nth-child(1) { transition-delay: 0.1s; }
+    #mobile-menu.active .mobile-link:nth-child(2) { transition-delay: 0.2s; }
+    #mobile-menu.active .mobile-link:nth-child(3) { transition-delay: 0.3s; }
+    #mobile-menu.active .mobile-link:nth-child(4) { transition-delay: 0.4s; }
 
-        /* Amélioration Solution 360 */
-        .solution-card {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-        }
-        .solution-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .solution-card:hover::before {
-            opacity: 1;
-        }
-        .list-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-            box-shadow: 0 0 10px currentColor;
-        }
-		
-		/* Portfolio Enhancements */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-        }
+    .mobile-link.contact-btn {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        padding: 0.8rem 2rem;
+        border-radius: 99px;
+        font-size: 1.5rem;
+    }
 
-        .portfolio-item {
-            position: relative;
-            border-radius: 2rem;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    /* --- HAMBURGER ICON --- */
+    .hamburger {
+        width: 24px;
+        height: 16px;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 100;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 1.5px;
+        background-color: white;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* --- FAQ & ACCORDEON --- */
+    .faq-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease;
+    }
+    .faq-item.active .faq-content {
+        max-height: 300px;
+        padding-top: 1rem;
+    }
+    .faq-item.active i { transform: rotate(180deg); }
+
+    /* --- PORTFOLIO GRID --- */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.5rem;
+    }
+
+    .portfolio-item {
+        position: relative;
+        border-radius: 2rem;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .portfolio-item.large { grid-column: span 8; height: 500px; }
+    .portfolio-item.medium { grid-column: span 4; height: 500px; }
+    .portfolio-item.small { grid-column: span 6; height: 400px; }
+
+    @media (max-width: 1024px) {
+        .portfolio-item.large, .portfolio-item.medium, .portfolio-item.small {
+            grid-column: span 12;
+            height: 350px;
         }
+    }
 
-        .portfolio-item.large { grid-column: span 8; height: 500px; }
-        .portfolio-item.medium { grid-column: span 4; height: 500px; }
-        .portfolio-item.small { grid-column: span 6; height: 400px; }
+    .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.4) 50%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        padding: 2rem;
+    }
 
-        @media (max-width: 1024px) {
-            .portfolio-item.large, .portfolio-item.medium, .portfolio-item.small {
-                grid-column: span 12;
-                height: 400px;
-            }
-        }
+    .portfolio-item:hover .project-overlay { opacity: 1; }
+    .portfolio-item:hover img { transform: scale(1.08); transition: transform 0.6s ease; }
 
-        .project-overlay {
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.4) 50%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+    /* --- CURSEUR PERSO --- */
+    #cursor {
+        width: 20px;
+        height: 20px;
+        background: #ffffff;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition: transform 0.15s ease-out;
+        display: none;
+        transform: translate(-50%, -50%);
+    }
 
-        .portfolio-item:hover .project-overlay { opacity: 1; }
-        .portfolio-item:hover img { transform: scale(1.08); }
+    @media (pointer: fine) {
+        #cursor { display: block; }
+    }
 
-        .tech-tag {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(4px);
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+    /* --- FORMULAIRE & DIVERS --- */
+    select option {
+        background-color: #1a1a1a;
+        color: white;
+    }
 
-        /* Form styling */
-        select option {
-            background-color: #1a1a1a;
-            color: white;
-        
+    .hero {
+        padding-top: 7rem;
+    }
 
-         }
+    .tech-pill {
+        padding: 0.75rem 1.5rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: all 0.3s ease;
+    }
 
-        .hero {
-           padding-top : 7rem;
-           
-        }
-    </style>
+    .tech-pill:hover {
+        border-color: #6366f1;
+        background: rgba(99, 102, 241, 0.05);
+    }
+
+        /* Ajustement de la taille de l'icône de fermeture */
+    #close-menu-extra i {
+        width: 24px;
+        height: 24px;
+        display: block;
+    }
+
+    /* On s'assure que le bouton mobile-menu n'a pas de marges parasites */
+    #close-menu-extra {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>
 </head>
 <body class="overflow-x-hidden">
 
@@ -256,22 +299,36 @@
                 <a href="#contact" class="bg-indigo-600 px-7 py-2.5 rounded-full font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">J'ai un projet</a>
             </div>
 
-            <button class="lg:hidden text-white" id="mobile-menu-btn">
-                <i data-lucide="menu"></i>
-            </button>
+            <button class="lg:hidden hamburger" id="menu-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         </div>
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-[60] flex flex-col items-center justify-center space-y-8 text-2xl font-bold lg:hidden">
-        <button class="absolute top-6 right-6 text-white" id="close-menu-btn">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-		<a href="#hero" class="mobile-link">Accueil</a>
-        <a href="#solution" class="mobile-link">Une solution 360°</a>
-        <a href="#portfolio" class="mobile-link">Réalisations</a>
-        <a href="#contact" class="mobile-link bg-indigo-600 px-8 py-3 rounded-full">J'ai un projet</a>
+   <div id="mobile-menu">
+    <div class="absolute top-0 left-0 w-full py-6 px-6 flex justify-end">
+        <button id="close-menu-extra" class="text-white opacity-80 hover:opacity-100 transition-opacity">
+            <i data-lucide="x" class="w-6 h-6"></i> </button>
     </div>
+
+    <a href="#hero" class="mobile-link">Accueil</a>
+    <a href="#solution" class="mobile-link">Solutions</a>
+    <a href="#portfolio" class="mobile-link">Projets</a>
+    <a href="#contact" class="mobile-link contact-btn">Parlons-en</a>
+
+    <div class="flex gap-6 mt-12 opacity-50">
+    <a href="https://www.instagram.com/TON_COMPTE" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-500 transition-colors">
+        <i data-lucide="instagram" class="w-6 h-6"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/TON_NOM" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-500 transition-colors">
+        <i data-lucide="linkedin" class="w-6 h-6"></i>
+    </a>
+    </div>
+</div>
 
     <!-- Hero Section --> 
      <section id="hero" class="py-32 bg-white/5 relative overflow-hidden ">
@@ -863,65 +920,118 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({ duration: 800, once: true });
-            lucide.createIcons();
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- 1. INITIALISATION ---
+        AOS.init({ 
+            duration: 800, 
+            once: true,
+            disable: 'mobile' // Désactivé sur mobile pour garantir zéro scroll horizontal
+        });
+        lucide.createIcons();
 
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) navbar.classList.add('nav-scrolled');
-                else navbar.classList.remove('nav-scrolled');
+        // --- 2. BARRE DE NAVIGATION (Scroll effect) ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('nav-scrolled');
+            else navbar.classList.remove('nav-scrolled');
+        });
+
+        const closeMenuExtra = document.getElementById('close-menu-extra');
+
+        if (closeMenuExtra) {
+        closeMenuExtra.addEventListener('click', () => {
+        // On déclenche la même fonction que le burger
+        menuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+        // --- 3. MENU MOBILE ANIMÉ (Correctif central) ---
+        const menuToggle = document.getElementById('menu-toggle'); // Ton nouveau bouton burger
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                const isOpening = !mobileMenu.classList.contains('active');
+                
+                menuToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                
+                // Bloque le scroll derrière quand le menu est ouvert
+                document.body.style.overflow = isOpening ? 'hidden' : '';
             });
+        }
 
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const closeBtn = document.getElementById('close-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            const toggleMenu = () => mobileMenu.classList.toggle('active');
-
-            menuBtn.addEventListener('click', toggleMenu);
-            closeBtn.addEventListener('click', toggleMenu);
-            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.addEventListener('click', () => item.classList.toggle('active'));
+        // Fermeture du menu lors du clic sur un lien
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
+        });
 
-            const cursor = document.getElementById('cursor');
+        // --- 4. ACCORDÉONS FAQ ---
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => item.classList.toggle('active'));
+        });
+
+        // --- 5. CURSEUR PERSONNALISÉ (Correctif scale) ---
+        const cursor = document.getElementById('cursor');
+        if (cursor) {
             document.addEventListener('mousemove', e => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
-                cursor.style.transform = 'translate(-50%, -50%)';
+                // Garde le translate pour le centrage
+                if (!cursor.style.transform.includes('scale')) {
+                    cursor.style.transform = 'translate(-50%, -50%)';
+                }
             });
 
-            document.querySelectorAll('a, button, .faq-item, .tech-pill, .benefit-card, .solution-card').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(2.5)');
-                el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
-            });
-        });
-		
-		 // Filter logic
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const filter = btn.dataset.filter;
-
-                    portfolioItems.forEach(item => {
-                        if (filter === 'all' || item.dataset.category === filter) {
-                            item.style.display = 'block';
-                            setTimeout(() => item.style.opacity = '1', 10);
-                        } else {
-                            item.style.opacity = '0';
-                            setTimeout(() => item.style.display = 'none', 400);
-                        }
-                    });
+            // Interaction avec les éléments cliquables
+            const targets = 'a, button, .faq-item, .tech-pill, .benefit-card, .solution-card, .filter-btn';
+            document.querySelectorAll(targets).forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
                 });
             });
-    </script>
+        }
+
+        // --- 6. LOGIQUE DE FILTRE PORTFOLIO ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Style des boutons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 400);
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>
